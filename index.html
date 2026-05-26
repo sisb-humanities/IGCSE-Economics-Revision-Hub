@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SISB IGCSE Economics — Revision Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#008BCC;--navy:#002F6C;--orange:#FF8F1C;
+    --ink:#16243a;--slate:#5a6b82;--paper:#f4f7fb;--card:#fff;--line:#e2e9f2;
+    --green:#1f8a4c;--red:#cf3b3b;
+    --shadow:0 10px 30px rgba(0,47,108,.08);--shadow-lift:0 18px 44px rgba(0,47,108,.16);--radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Lato',-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  .wordmark{font-weight:900;letter-spacing:-.5px;display:inline-flex;align-items:center;line-height:1}
+  .wordmark .bar{display:inline-block;width:.15em;height:.66em;background:var(--blue);margin:0 .03em;border-radius:1px}
+
+  header.top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 18px rgba(0,0,0,.18)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brandblock{display:flex;align-items:center;gap:14px;cursor:pointer}
+  .brandblock .wordmark{font-size:30px;color:#fff}
+  .brandblock .sub{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#9fc4e0;border-left:1px solid #2b517f;padding-left:14px;line-height:1.3}
+  .crumbs{font-size:13px;color:#bcd4ea}
+  .crumbs b{color:#fff}
+
+  .hero{background:radial-gradient(1200px 380px at 88% -40%, rgba(255,143,28,.22), transparent 60%),linear-gradient(135deg,var(--navy) 0%, #013a82 55%, var(--blue) 130%);color:#fff;padding:64px 0 88px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(255,255,255,.10) 1px, transparent 1.4px);background-size:26px 26px;mask-image:linear-gradient(180deg,#000,transparent)}
+  .hero .wrap{position:relative;z-index:2}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:99px;color:#dcebff;backdrop-filter:blur(4px)}
+  .hero h1{font-size:clamp(30px,5vw,52px);font-weight:900;letter-spacing:-1px;margin:18px 0 10px;line-height:1.05}
+  .hero h1 .em{color:var(--orange)}
+  .hero p.lede{font-size:18px;max-width:620px;color:#d6e6f5;font-weight:300}
+  .globe-row{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .globe-row span{font-size:13px;background:rgba(255,255,255,.1);padding:6px 13px;border-radius:99px;border:1px solid rgba(255,255,255,.18)}
+
+  section.units{margin-top:-52px;position:relative;z-index:5;padding-bottom:60px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:540px){.grid{grid-template-columns:1fr}}
+  .tile{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border:1px solid var(--line);position:relative;overflow:hidden;transition:.28s cubic-bezier(.2,.7,.3,1);opacity:0;transform:translateY(16px)}
+  .tile.in{opacity:1;transform:none}
+  .tile .uno{font-size:13px;font-weight:900;letter-spacing:1px;color:var(--blue)}
+  .tile h3{font-size:19px;font-weight:900;margin:6px 0 4px;letter-spacing:-.3px}
+  .tile .meta{font-size:13px;color:var(--slate)}
+  .tile .strip{position:absolute;left:0;top:0;height:100%;width:5px;background:var(--blue)}
+  .tile.live{cursor:pointer}
+  .tile.live:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift)}
+  .tile.live:hover .go{background:var(--orange)}
+  .tile .go{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:13px;font-weight:700;color:#fff;background:var(--navy);padding:8px 15px;border-radius:99px;transition:.2s}
+  .tile.soon{opacity:.62}
+  .tile.soon .strip{background:#c3cfde}
+  .badge-soon{position:absolute;top:16px;right:16px;font-size:10px;letter-spacing:1px;text-transform:uppercase;background:#eef2f7;color:#8294aa;padding:4px 9px;border-radius:99px;font-weight:700}
+  .badge-live{position:absolute;top:16px;right:16px;font-size:10px;letter-spacing:1px;text-transform:uppercase;background:#e3f6ec;color:var(--green);padding:4px 9px;border-radius:99px;font-weight:700}
+
+  .view{display:none}
+  .view.active{display:block;animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .unit-head{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;padding:40px 0 34px}
+  .back{display:inline-flex;align-items:center;gap:7px;color:#cfe3f5;font-size:14px;font-weight:700;cursor:pointer;border:none;background:none;margin-bottom:14px}
+  .back:hover{color:#fff}
+  .unit-head h2{font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-.8px}
+  .unit-head .tag{color:#cfe3f5;font-weight:300;font-size:16px;margin-top:4px}
+
+  .secnav{position:sticky;top:64px;background:#fff;border-bottom:1px solid var(--line);z-index:30;box-shadow:0 4px 14px rgba(0,47,108,.04)}
+  .secnav .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 22px}
+  .secnav button{white-space:nowrap;border:none;background:none;font-family:inherit;font-weight:700;font-size:13px;color:var(--slate);padding:8px 14px;border-radius:99px;cursor:pointer;transition:.18s}
+  .secnav button:hover{background:var(--paper);color:var(--navy)}
+  .secnav button.on{background:var(--navy);color:#fff}
+
+  .block{padding:42px 0;border-bottom:1px solid var(--line)}
+  .block h3.t{font-size:24px;font-weight:900;letter-spacing:-.4px;display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .block h3.t .dot{width:11px;height:11px;border-radius:99px;background:var(--orange)}
+  .block .intro{color:var(--slate);max-width:680px;margin-bottom:24px}
+
+  .chap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;box-shadow:var(--shadow)}
+  .chap summary{list-style:none;cursor:pointer;padding:18px 22px;display:flex;align-items:center;gap:14px;font-weight:900;font-size:17px}
+  .chap summary::-webkit-details-marker{display:none}
+  .chap .num{background:var(--paper);color:var(--blue);font-size:14px;font-weight:900;border-radius:9px;padding:6px 11px;border:1px solid var(--line)}
+  .chap summary .chev{margin-left:auto;color:var(--slate);transition:.25s}
+  .chap[open] summary .chev{transform:rotate(180deg)}
+  .chap .body{padding:0 22px 22px;border-top:1px solid var(--line)}
+  .chap .body p{margin:14px 0;color:#34465f}
+  .chap .keypoints{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+  .chap .keypoints span{font-size:12.5px;background:var(--paper);border:1px solid var(--line);padding:5px 11px;border-radius:99px;color:var(--navy);font-weight:700}
+  .reslinks{display:flex;gap:10px;flex-wrap:wrap}
+  .reslink{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:13.5px;padding:10px 16px;border-radius:10px;transition:.2s}
+  .reslink.yt{background:#fff0f0;color:#c0392b;border:1px solid #f6d6d6}
+  .reslink.yt:hover{background:#c0392b;color:#fff}
+  .reslink.nb{background:#eef6fb;color:var(--blue);border:1px solid #d4e8f4}
+  .reslink.nb:hover{background:var(--blue);color:#fff}
+  .reslink .ic{font-size:15px}
+
+  .fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.fc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.fc-grid{grid-template-columns:1fr}}
+  .fc{perspective:1200px;height:210px;cursor:pointer}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+  .fc.flip .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:18px;display:flex;flex-direction:column;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .fc-front{background:var(--card)}
+  .fc-front .term{font-size:19px;font-weight:900;color:var(--navy);letter-spacing:-.3px}
+  .fc-front .hint{margin-top:auto;font-size:11.5px;color:#9aa9bd;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+  .fc-back{background:linear-gradient(150deg,var(--navy),var(--blue));color:#fff;transform:rotateY(180deg);overflow:auto}
+  .fc-back .def{font-size:13.5px;font-weight:700;line-height:1.45}
+  .fc-back .eng{font-size:12px;color:#cfe3f5;margin-top:10px;font-weight:300;font-style:italic;line-height:1.4}
+  .fc-back .eng b{color:var(--orange);font-style:normal;letter-spacing:.5px}
+
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:620px){.match{grid-template-columns:1fr}}
+  .mcol h4{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--slate);margin-bottom:10px}
+  .mitem{background:var(--card);border:2px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:9px;cursor:pointer;font-size:14px;font-weight:700;transition:.15s;user-select:none}
+  .mitem.term{color:var(--navy)}
+  .mitem.def{color:#34465f;font-weight:400}
+  .mitem:hover{border-color:var(--blue)}
+  .mitem.sel{border-color:var(--orange);background:#fff7ee}
+  .mitem.done{border-color:var(--green);background:#eefaf1;color:var(--green);cursor:default;opacity:.85}
+  .mitem.wrong{border-color:var(--red);animation:shake .35s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  .dd-pool{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;min-height:54px;padding:14px;background:#fff;border:2px dashed var(--line);border-radius:14px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:9px 15px;font-size:13.5px;font-weight:700;color:var(--navy);cursor:grab;box-shadow:var(--shadow);transition:.15s}
+  .chip:active{cursor:grabbing}
+  .chip.dragging{opacity:.4}
+  .bins{display:grid;gap:12px}
+  .bins.b2{grid-template-columns:repeat(2,1fr)}
+  .bins.b3{grid-template-columns:repeat(3,1fr)}
+  .bins.b4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:720px){.bins.b3,.bins.b4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.bins{grid-template-columns:1fr!important}}
+  .bin{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px;min-height:150px;transition:.18s}
+  .bin.over{border-color:var(--blue);background:#f0f8fd}
+  .bin h5{font-size:14px;font-weight:900;color:var(--blue);text-align:center;margin-bottom:4px}
+  .bin .sub{font-size:11px;color:var(--slate);text-align:center;margin-bottom:10px}
+  .bin .chip{display:block;margin:7px auto;text-align:center;cursor:default;width:fit-content}
+  .bin .chip.ok{border-color:var(--green);background:#eefaf1;color:var(--green)}
+  .bin .chip.no{border-color:var(--red);background:#fdeeee;color:var(--red)}
+
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .q .stem{font-weight:700;margin-bottom:14px}
+  .q .stem .qn{color:var(--blue);font-weight:900;margin-right:6px}
+  .opt{display:block;border:2px solid var(--line);border-radius:10px;padding:11px 14px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:.15s}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{border-color:var(--green);background:#eefaf1}
+  .opt.incorrect{border-color:var(--red);background:#fdeeee}
+  .opt.locked{cursor:default}
+  .fb{display:none;margin-top:10px;font-size:13.5px;padding:11px 14px;border-radius:10px;background:#eef6fb;border-left:4px solid var(--blue);color:#234}
+  .fb.show{display:block}
+  .qmeta{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.4px;color:var(--blue);background:#eef6fb;border:1px solid #d4e8f4;border-radius:6px;padding:2px 7px;margin-right:8px;vertical-align:middle}
+  .mcq-svg{background:#fbfdff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:4px 0 14px;text-align:center}
+  .mcq-svg svg{width:100%;max-width:300px;height:auto}
+  .stem table.qt{border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  .stem table.qt th,.stem table.qt td{border:1px solid var(--line);padding:6px 12px;text-align:center}
+  .stem table.qt th{background:var(--paper);color:var(--navy);font-weight:900;text-align:left}
+
+  .btn{font-family:inherit;border:none;cursor:pointer;font-weight:700;font-size:14px;padding:11px 20px;border-radius:99px;transition:.2s}
+  .btn.primary{background:var(--blue);color:#fff}
+  .btn.primary:hover{background:var(--navy)}
+  .btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--blue)}
+  .toolbar{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+  .score{font-weight:900;color:var(--navy);font-size:14px}
+
+  .exam-intro{background:linear-gradient(135deg,#fff,#f0f8fd);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:22px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .lg{font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:7px;display:inline-flex;align-items:center;gap:6px}
+  .lg .sw{width:14px;height:14px;border-radius:4px}
+  .examq{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .examq .qhead{padding:16px 20px;display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--line);cursor:pointer}
+  .mk{font-weight:900;font-size:13px;color:#fff;border-radius:8px;padding:7px 11px;white-space:nowrap;line-height:1}
+  .mk2{background:var(--green)}.mk4{background:#d9a300}.mk6{background:var(--orange)}.mk8{background:var(--red)}
+  .examq .qtext{font-weight:700;font-size:15.5px}
+  .examq .cmd{font-size:11.5px;text-transform:uppercase;letter-spacing:1px;color:var(--slate);font-weight:700;margin-bottom:3px}
+  .examq .toggle{margin-left:auto;font-size:13px;font-weight:700;color:var(--blue);white-space:nowrap}
+  .answer{display:none;padding:20px;background:#fbfdff}
+  .answer.show{display:block}
+  .answer .recipe{font-size:12.5px;color:var(--slate);font-weight:700;margin-bottom:14px;padding:9px 13px;background:#fff;border:1px dashed var(--line);border-radius:9px}
+  .model{font-size:15px;line-height:1.95;color:#22344c}
+  .ss{padding:1px 4px;border-radius:4px;font-weight:700;position:relative}
+  .ss[data-step]::after{content:attr(data-step);position:relative;top:-.7em;font-size:9px;letter-spacing:.5px;font-weight:900;margin-left:4px;padding:1px 5px;border-radius:4px;text-transform:uppercase}
+  .ss.s-define{background:#e3f6ec}.ss.s-define::after{background:var(--green);color:#fff}
+  .ss.s-example{background:#fdf4e1}.ss.s-example::after{background:#d9a300;color:#fff}
+  .ss.s-explain{background:#fdf4e1}.ss.s-explain::after{background:#d9a300;color:#fff}
+  .ss.s-chain{background:#ffeede}.ss.s-chain::after{background:var(--orange);color:#fff}
+  .ss.s-for{background:#e3f6ec}.ss.s-for::after{background:var(--green);color:#fff}
+  .ss.s-against{background:#fdeeee}.ss.s-against::after{background:var(--red);color:#fff}
+  .ss.s-judge{background:#e6effb}.ss.s-judge::after{background:var(--navy);color:#fff}
+  .examiner{margin-top:16px;font-size:13px;background:#eef6fb;border-left:4px solid var(--blue);padding:12px 15px;border-radius:9px;color:#234}
+  .examiner b{color:var(--navy)}
+
+  footer{background:var(--navy);color:#9fc4e0;padding:34px 0;font-size:13px;text-align:center}
+  footer .wordmark{font-size:24px;color:#fff;margin-bottom:8px}
+
+  /* checklist / RAG tracker */
+  .progwrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow)}
+  .progwrap .ptop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+  .progwrap .ptop b{font-size:15px;color:var(--navy)}
+  .progwrap .ptop .pct{font-size:13px;color:var(--slate);font-weight:700}
+  .pbar{height:12px;border-radius:99px;background:#e9eff6;overflow:hidden}
+  .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:99px;transition:width .5s cubic-bezier(.2,.7,.3,1)}
+  .clgroup{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;box-shadow:var(--shadow)}
+  .clgroup .gh{padding:13px 18px;font-weight:900;font-size:15px;color:var(--navy);background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
+  .clgroup .gh .num{background:#fff;color:var(--blue);font-size:12.5px;font-weight:900;border-radius:8px;padding:4px 9px;border:1px solid var(--line)}
+  .lo{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .lo:last-child{border-bottom:none}
+  .lo .txt{flex:1;font-size:14.5px;color:#2b3c54}
+  .lo.is-g .txt{color:var(--slate)}
+  .rag{display:flex;gap:5px;flex-shrink:0}
+  .rag button{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.3px;border:1.5px solid var(--line);background:#fff;color:#9aa9bd;border-radius:99px;padding:5px 11px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .rag button:hover{border-color:#c3cfde}
+  .rag button.on-r{background:#fdeeee;border-color:var(--red);color:var(--red)}
+  .rag button.on-a{background:#fdf4e1;border-color:#d9a300;color:#a87f00}
+  .rag button.on-g{background:#eefaf1;border-color:var(--green);color:var(--green)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brandblock" onclick="showHome()">
+      <span class="wordmark">S<span class="bar"></span>SB</span>
+      <span class="sub">IGCSE<br>Economics</span>
+    </div>
+    <div class="crumbs" id="crumbs">Revision Hub</div>
+  </div>
+</header>
+
+<div class="view active" id="home">
+  <div class="hero">
+    <div class="wrap">
+      <span class="pill">★ Cambridge IGCSE 0455 · Spirit of Excellence</span>
+      <h1>Economics Revision Hub<br><span class="em">from Bangkok to the world.</span></h1>
+      <p class="lede">Six units. Thirty-five topics. Every idea grounded in a real Thai example, then connected to the global economy you'll be examined on.</p>
+      <div class="globe-row">
+        <span>🇹🇭 Local case studies</span><span>🌏 ASEAN &amp; the world</span><span>📈 Exam technique built in</span>
+      </div>
+    </div>
+  </div>
+  <section class="units"><div class="wrap"><div class="grid" id="tilegrid"></div></div></section>
+</div>
+
+<div class="view" id="unitView"></div>
+
+<footer><div class="wrap">
+  <div class="wordmark">S<span class="bar"></span>SB</div>
+  Singapore International School of Bangkok · IGCSE Economics Revision Hub<br>
+  Units 1–3 live · built around your scheme of work and sentence-starter framework.
+</div></footer>
+
+<script>
+/* ===================== UNIT DATA ===================== */
+const UNITS = {
+1:{
+ n:1, title:"The Basic Economic Problem", topics:"1.1–1.4 · 4 topics", live:true,
+ tag:"Scarcity, choice and opportunity cost — why even Bangkok runs out of things.",
+ los:[
+  {c:"1.1 Nature of the Basic Economic Problem",o:["explain the difference between needs and wants","explain why finite resources and unlimited wants create scarcity","explain why scarcity forces choices and trade-offs"]},
+  {c:"1.2 Factors of Production",o:["identify and define the four factors of production (CELL)","give an example and the reward of each factor","explain how factors can change in quantity and quality"]},
+  {c:"1.3 Opportunity Cost",o:["define opportunity cost accurately","apply opportunity cost to consumers, workers, firms and governments"]},
+  {c:"1.4 Production Possibility Curves",o:["draw and interpret a production possibility curve","use a PPC to show opportunity cost, efficiency and unused resources","explain what causes a PPC to shift outward (growth)"]}
+ ],
+ chapters:[
+  {id:"1.1",title:"Nature of the Basic Economic Problem",blurb:"Resources are scarce but our wants are unlimited — so every choice means giving something up. Even a fast-growing city like Bangkok faces scarcity: land in Sukhumvit, water in the dry season, seats on the BTS at 8am.",points:["Scarcity","Needs vs wants","Economic vs free goods","Choice"],yt:"https://youtu.be/rlO744yUiuI",nb:"https://notebooklm.google.com/notebook/d7d8df4d-9d50-47e4-aa70-30654ac935ee"},
+  {id:"1.2",title:"Factors of Production",blurb:"The four inputs used to make everything — Capital, Enterprise, Land, Labour (CELL). Thailand uses all four: rice paddies in the Central Plains (land), assembly-line workers in Rayong (labour and capital), and the entrepreneur who starts a Bangkok street-food cart (enterprise).",points:["Land","Labour","Capital","Enterprise","CELL"],yt:"https://youtu.be/bTZs5fag_s0",nb:"https://notebooklm.google.com/notebook/0b32e0e4-1363-48ed-a92b-84207374b985"},
+  {id:"1.3",title:"Opportunity Cost",blurb:"The next best alternative you give up when you choose. If the Thai government spends a budget on extending the MRT line, the opportunity cost might be a new hospital it could have built instead.",points:["Next best alternative","Trade-offs","Government & firms"],yt:"https://youtu.be/9-CLG9RES5A",nb:"https://notebooklm.google.com/notebook/5e147d05-bdbd-41b6-8669-06c5e1bc0bab"},
+  {id:"1.4",title:"Production Possibility Curves",blurb:"A PPC shows the maximum an economy can produce when resources are used efficiently — usually drawn as capital goods vs consumer goods. Moving along it shows opportunity cost; shifting it outward shows economic growth.",points:["Capital vs consumer goods","Efficiency","Opportunity cost","Economic growth"],yt:"https://youtu.be/xBqbHbP4kIg",nb:"https://notebooklm.google.com/notebook/629ac9c2-9472-40d6-9001-72c73cd945a9"}
+ ],
+ terms:[
+  {t:"Scarcity",d:"Limited availability of resources — not enough to satisfy all our wants.",e:"As things get scarcer, their price rises!"},
+  {t:"Opportunity cost",d:"The cost of the next best alternative that is foregone when a decision is made.",e:"You go to school and miss high-quality sleeping time!"},
+  {t:"Capital",d:"The equipment and machinery used to produce goods and services.",e:"Think spanner or digger! It speeds up production."},
+  {t:"Enterprise",d:"The ability to organise the other factors of production to create goods or services. There is risk in enterprising.",e:"Risk-takers who organise the other factors and make 'fat stacks'!"},
+  {t:"Land",d:"Natural resources used in production, including agricultural land, forests, water and minerals.",e:"Land includes anything above or below the surface — even the sea!"},
+  {t:"Labour",d:"The human effort used in the production of goods and services, including physical and mental work.",e:"That's you, putting in the work."},
+  {t:"Factors of production",d:"The inputs used in production — land, labour, capital and enterprise, or CELL for short.",e:"Countries encourage the best use of CELL so the economy can grow."},
+  {t:"Needs",d:"Basic requirements essential for survival, such as food, shelter and clothing.",e:"You can debate whether wifi is a need!"},
+  {t:"Wants",d:"Desires for goods and services that are not essential for survival but improve quality of life.",e:"Wants are insatiable — we always want more stuff."},
+  {t:"Free goods",d:"Goods that are abundant and not scarce, available with no opportunity cost or payment, like air.",e:"They're free and limitless!"},
+  {t:"Merit goods",d:"Goods that provide positive externalities and are often under-consumed in a free market, like education.",e:"The opposite of demerit goods!"},
+  {t:"Demerit goods",d:"Goods that are harmful to individuals or society, often over-consumed, like cigarettes.",e:"Governments love to tax or regulate these!"},
+  {t:"Production possibility curve",d:"A curve showing the possible output of two goods if factors of production are used efficiently.",e:"Usually drawn with capital and consumer goods."},
+  {t:"Consumer goods",d:"Goods wanted because they provide satisfaction to their owner, such as food and electronics.",e:"Used by individuals for personal satisfaction."},
+  {t:"Public goods",d:"Goods that are non-excludable and non-rivalrous, available to everyone, like street lighting.",e:"Provided by government and paid for by taxpayers!"}
+ ],
+ match:[
+  {t:"Scarcity",d:"Not enough resources to satisfy unlimited wants."},
+  {t:"Opportunity cost",d:"The next best alternative given up when choosing."},
+  {t:"Capital",d:"Man-made equipment and machinery used in production."},
+  {t:"Enterprise",d:"Organising the other factors and taking a risk."},
+  {t:"Free goods",d:"Abundant goods with no opportunity cost, like air."},
+  {t:"Merit goods",d:"Beneficial goods often under-consumed, like education."}
+ ],
+ dd:{title:"Sort the factors of production (CELL)",intro:"Drag each real Thai example into the correct factor of production. Remember: <b>C</b>apital, <b>E</b>nterprise, <b>L</b>and, <b>L</b>abour.",
+  bins:[{key:"Capital",sub:"Man-made aids"},{key:"Enterprise",sub:"Risk & organising"},{key:"Land",sub:"Natural resources"},{key:"Labour",sub:"Human effort"}],
+  items:[{label:"Robotic arms in a Rayong car factory",bin:"Capital"},{label:"Founder of a Bangkok food-delivery startup",bin:"Enterprise"},{label:"Rice paddies in the Central Plains",bin:"Land"},{label:"A teacher at SISB",bin:"Labour"},{label:"A delivery truck",bin:"Capital"},{label:"Mineral deposits and forests",bin:"Land"},{label:"A vendor risking savings on a new cart",bin:"Enterprise"},{label:"Hotel staff in Phuket",bin:"Labour"}]},
+ mcq:[
+  {q:"The basic economic problem exists because…",o:["money is limited","resources are scarce but wants are unlimited","governments tax people","prices keep rising"],a:1,fb:"Scarcity of resources against unlimited wants is the root of the economic problem."},
+  {q:"Which is the best example of 'land' as a factor of production?",o:["A factory robot","A coral reef and fishing waters off Phuket","A bank loan","A shop manager"],a:1,fb:"Land = all natural resources, including the sea. A robot is capital; a manager is labour."},
+  {q:"A student revises instead of going to the night market. The opportunity cost is…",o:["the cost of the bus","the Economics grade","the night market trip given up","nothing"],a:2,fb:"Opportunity cost is the next best alternative forgone — here, the night market."},
+  {q:"On a PPC, a point inside the curve shows that resources are…",o:["fully and efficiently used","not used efficiently","used only for capital goods","growing"],a:1,fb:"Inside the curve = idle resources, so production is inefficient."},
+  {q:"Which factor of production earns 'profit' as its reward?",o:["Land","Labour","Capital","Enterprise"],a:3,fb:"Enterprise earns profit; land earns rent, labour earns wages, capital earns interest."},
+  {q:"An outward shift of the whole PPC represents…",o:["a movement along the curve","economic growth","rising opportunity cost","unemployment"],a:1,fb:"More/better resources push the whole curve outward — that is economic growth."},
+  {q:"Clean air in a remote area is best described as a…",o:["merit good","free good","capital good","demerit good"],a:1,fb:"It is abundant with no opportunity cost, so it is a free good."},
+  {q:"Producing more capital goods today rather than consumer goods is most likely to…",o:["reduce future growth","raise living standards now","increase future productive capacity","have no effect"],a:2,fb:"Capital goods build future capacity, shifting the PPC out later."}
+ ],
+ exam:[
+  {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'opportunity cost'.",recipe:"2 marks → Term → Definition. Precise and accurate. No example needed.",
+   model:`<span class="ss s-define" data-step="Define">Opportunity cost means</span> the next best alternative that is given up when a choice is made.`,
+   note:"Two marks for a clean definition — one for 'next best alternative', one for 'given up / foregone'. Don't add an example; it earns nothing here."},
+  {marks:4,cls:"mk4",cmd:"Explain with an example",q:"Explain, using an example, what is meant by capital as a factor of production.",recipe:"4 marks → Define → Example → Explain → Develop.",
+   model:`<span class="ss s-define" data-step="Define">Capital means</span> the man-made equipment and machinery used to produce goods and services. <span class="ss s-example" data-step="Example">For example,</span> the robotic assembly lines in a car factory in Rayong are capital. <span class="ss s-explain" data-step="Explain">This happens because</span> the machines are not wanted for their own sake but are used to produce other goods — finished cars. <span class="ss s-explain" data-step="Develop">Therefore,</span> capital is a factor of production because it allows firms to produce more output, more quickly.`,
+   note:"The Rayong example lifts this from 2 to 4 marks — Golden Rule 1: always include an example. The 'because' unlocks the explanation marks."},
+  {marks:6,cls:"mk6",cmd:"Analyse",q:"Analyse how producing more capital goods rather than consumer goods might affect an economy.",recipe:"6 marks → Define → Context → Chain of reasoning ×2 → Overall.",
+   model:`Capital goods are used to produce other goods, while consumer goods are bought for satisfaction. <span class="ss s-chain" data-step="Context">In Thailand,</span> this might mean building more factories in the Eastern Economic Corridor instead of making food and clothing. <span class="ss s-chain" data-step="Effect 1">One effect is</span> that fewer consumer goods are made now. <span class="ss s-chain" data-step="Chain">This leads to</span> a fall in current living standards, because households have less to consume today. <span class="ss s-chain" data-step="Effect 2">Another effect is</span> that the stock of capital rises. <span class="ss s-chain" data-step="Chain">This increases</span> the economy's productive capacity, because more machines produce more in future. <span class="ss s-chain" data-step="Chain">As a result,</span> the PPC shifts outward. <span class="ss s-chain" data-step="Overall">Overall,</span> producing more capital goods is likely to lower consumption now but raise growth later.`,
+   note:"Two clear chains (cause → effect → effect). If your answer feels short, your chain is broken — add another 'this leads to…'."},
+  {marks:8,cls:"mk8",cmd:"Discuss",q:"Discuss whether an economy should always devote more of its resources to capital goods rather than consumer goods.",recipe:"8 marks → FOR → AGAINST → JUDGMENT (most marks are in the judgment).",
+   model:`<span class="ss s-for" data-step="For">One advantage of</span> producing more capital goods is that it raises an economy's productive capacity. <span class="ss s-for" data-step="For">This means that</span> the economy can produce more in future years. <span class="ss s-for" data-step="For">For example,</span> if Thailand invests in machinery in the Eastern Economic Corridor, it can manufacture more cars and electronics. <span class="ss s-for" data-step="For">This can lead to</span> higher economic growth. <span class="ss s-for" data-step="For">Therefore,</span> future living standards may improve.<br><br><span class="ss s-against" data-step="Against">However,</span> devoting more resources to capital goods is not always beneficial, because it reduces consumer goods today. <span class="ss s-against" data-step="Against">One problem is</span> that current living standards may fall. <span class="ss s-against" data-step="Against">This can cause</span> hardship for households with less food, clothing and housing now. <span class="ss s-against" data-step="Against">Another disadvantage is</span> that investment is not always used efficiently. <span class="ss s-against" data-step="Against">As a result,</span> some resources may be wasted.<br><br><span class="ss s-judge" data-step="Judgment">Overall,</span> producing more capital goods tends to be beneficial when an economy wants long-term growth and can afford to consume less now. <span class="ss s-judge" data-step="Judgment">This depends on</span> the time period and how poor the population currently is. <span class="ss s-judge" data-step="Judgment">If</span> a country is already wealthy, then sacrificing some consumption is sensible. <span class="ss s-judge" data-step="Judgment">However, if</span> a country is very poor, then more consumer goods now may matter more. <span class="ss s-judge" data-step="Judgment">Therefore, I conclude that</span> an economy should not always favour capital goods — the right balance depends on its level of development.`,
+   note:"The judgment paragraph carries the most marks. Don't just pick a side — say 'it depends on…' and name the conditions (time period, level of development)."}
+ ]
+},
+
+2:{
+ n:2, title:"The Allocation of Resources", topics:"2.1–2.9 · 9 topics", live:true,
+ tag:"Demand, supply and price — how Bangkok's markets decide who gets what.",
+ los:[
+  {c:"2.1 Demand",o:["define demand and effective demand","explain the law of demand and draw a demand curve","list the causes of a shift in demand"]},
+  {c:"2.2 Supply",o:["define supply and explain the law of supply","draw a supply curve and explain its shape","list the causes of a shift in supply"]},
+  {c:"2.3 Price Determination",o:["identify equilibrium price and quantity on a diagram","explain how shortages and surpluses are removed"]},
+  {c:"2.4 Price Changes",o:["show how shifts in demand or supply change the equilibrium","distinguish a shift in a curve from a movement along it"]},
+  {c:"2.5 Price Elasticity of Demand",o:["define and calculate price elasticity of demand","explain the factors that determine PED","link PED to a firm's total revenue"]},
+  {c:"2.6 Price Elasticity of Supply",o:["define and calculate price elasticity of supply","explain the factors that determine PES, especially time"]},
+  {c:"2.7 Market Economic System",o:["explain how the price mechanism allocates resources","evaluate the advantages and disadvantages of a market system"]},
+  {c:"2.8 Market Failure",o:["define market failure and externalities","distinguish private, external and social costs and benefits","explain merit, demerit and public goods"]},
+  {c:"2.9 Mixed Economic System",o:["describe the features of a mixed economy","explain how and why governments intervene in markets"]}
+ ],
+ chapters:[
+  {id:"2.1",title:"Demand",blurb:"Demand is the quantity consumers are willing and able to buy at each price. As price falls, quantity demanded rises — the law of demand. Drop the price of pad thai at a Bangkok stall and more people buy it.",points:["Law of demand","Demand curve","Conditions of demand","Effective demand"],yt:"https://youtu.be/36Oc7HF8rrI",nb:"https://notebooklm.google.com/notebook/06a20054-8e6b-43d0-a9b7-6c9b7dd5dcd2"},
+  {id:"2.2",title:"Supply",blurb:"Supply is the quantity producers will offer for sale at each price; higher prices usually mean more supply. When the 2011 floods hit Thailand's industrial estates, the supply of many goods fell sharply.",points:["Law of supply","Supply curve","Conditions of supply"],yt:"https://youtu.be/FcsTQDhF_n0",nb:"https://notebooklm.google.com/notebook/9d7de4e3-20e6-4888-86b1-d928ab5e64d0"},
+  {id:"2.3",title:"Price Determination",blurb:"Where demand meets supply you get the equilibrium price — the market clears, with no shortage or surplus. Hotel rooms in Phuket settle at a higher equilibrium in the high season.",points:["Equilibrium","Excess demand (shortage)","Excess supply (surplus)"],yt:"https://youtu.be/1WSpdvbpHjw",nb:"https://notebooklm.google.com/notebook/738baa5f-52f6-448e-b8e5-f52567228947"},
+  {id:"2.4",title:"Price Changes",blurb:"When demand or supply shifts, the equilibrium moves. A collapse in tourism shifts demand for Bangkok hotels to the left, lowering both price and quantity.",points:["Shifts vs movements","Causes of shifts","New equilibrium"],yt:"https://youtu.be/eK4WdeeUMQY",nb:"https://notebooklm.google.com/notebook/62049490-ae15-4caa-b2d0-1614bab429bb"},
+  {id:"2.5",title:"Price Elasticity of Demand",blurb:"PED measures how responsive quantity demanded is to a price change. Cigarettes are inelastic (addictive, few substitutes); one café's coffee is elastic (lots of rivals nearby).",points:["Elastic vs inelastic","Determinants","Total revenue","PED formula"],yt:"https://youtu.be/ZDlrIghc0vk",nb:"https://notebooklm.google.com/notebook/ed0b46ec-8e50-47ba-ba06-ff8521e7b085"},
+  {id:"2.6",title:"Price Elasticity of Supply",blurb:"PES measures how responsive quantity supplied is to a price change — mostly about time. Rice can't be grown overnight, so supply is inelastic in the short run.",points:["Determinants","Time period","PES formula"],yt:"https://youtu.be/e20Daygcot4",nb:"https://notebooklm.google.com/notebook/7fa50724-0acb-47a2-907e-2305a431fa08"},
+  {id:"2.7",title:"Market Economic System",blurb:"In a pure market system the price mechanism — signalling, incentive and rationing — allocates resources with no government. It is efficient but can ignore fairness and public goods.",points:["Price mechanism","Advantages","Disadvantages"],yt:"https://youtu.be/FbVYbtu75vw",nb:"https://notebooklm.google.com/notebook/a1bb7a27-23e6-4a19-8671-d48824ea2ac9"},
+  {id:"2.8",title:"Market Failure",blurb:"When markets allocate resources inefficiently. Bangkok's traffic creates pollution — a negative externality — while education is under-provided because it is a merit good.",points:["Externalities","Merit & demerit goods","Public goods"],yt:"https://youtu.be/mZpCqLQI4DU",nb:"https://notebooklm.google.com/notebook/1f817eb2-046d-40e9-aa59-a87a69333497"},
+  {id:"2.9",title:"Mixed Economic System",blurb:"Most economies, including Thailand, mix private markets with government intervention — taxes, subsidies, state enterprises such as PTT, and public services like roads and schools.",points:["Private + public sector","Government intervention","Thailand as a mixed economy"],yt:"https://youtu.be/CBkHWoNSD2o",nb:"https://notebooklm.google.com/notebook/ab73f610-5c71-4d6a-86a6-0baf0c042ecb"}
+ ],
+ terms:[
+  {t:"Demand",d:"The desire and ability of consumers to buy a product at different prices.",e:"How much you want something and whether you've got the cash to back it up."},
+  {t:"Supply",d:"The amount of a product that producers are willing and able to sell at different prices.",e:"How much stuff a firm is ready to sell at each price."},
+  {t:"Equilibrium",d:"The price and quantity at which the supply and demand curves intersect.",e:"The sweet spot where everything balances out."},
+  {t:"Excess demand",d:"When the quantity demanded is greater than the quantity supplied at a given price.",e:"Everyone wants it, but there isn't enough — Black Friday chaos!"},
+  {t:"Excess supply",d:"When the quantity supplied is greater than the quantity demanded at a given price.",e:"Too much of something no one wants — leftover fruitcakes!"},
+  {t:"Extension in demand",d:"A rise in quantity demanded caused by a fall in price — a movement along the demand curve.",e:"Cheaper, so you grab a few more!"},
+  {t:"Contraction in demand",d:"A fall in quantity demanded caused by a rise in price — a movement along the demand curve.",e:"Prices up, your wallet protests, you buy less."},
+  {t:"Substitute goods",d:"Goods that can be used in place of one another, such as butter and margarine.",e:"Choosing Pepsi over Coke, or vice versa!"},
+  {t:"Complementary goods",d:"Goods often bought together because they are used together, like petrol and cars.",e:"Chips and ketchup — one without the other isn't the same."},
+  {t:"Inferior goods",d:"Goods for which demand falls as incomes rise, as consumers switch to better alternatives.",e:"Graduating from instant noodles to gourmet pasta!"},
+  {t:"Price elastic demand",d:"When the % change in quantity demanded is greater than the % change in price.",e:"A small price change sends people wild — a big sale on shoes."},
+  {t:"Price inelastic demand",d:"When the % change in quantity demanded is smaller than the % change in price.",e:"A price rise doesn't scare you off — must-have items."},
+  {t:"External costs",d:"Negative side-effects of production or consumption on people not in the transaction, like pollution.",e:"A factory pumps out smoke and you breathe it in!"},
+  {t:"External benefits",d:"Positive side-effects on people outside the transaction, like public health from vaccination.",e:"Your neighbour's garden cleaning the air for you!"},
+  {t:"Social costs",d:"The total costs of production — private costs plus external costs, like pollution.",e:"The firm's bills plus the mess everyone else cleans up."},
+  {t:"Utility",d:"The satisfaction or pleasure derived from consuming a product or service.",e:"The 'Yum!' factor of your favourite snack."}
+ ],
+ match:[
+  {t:"Demand",d:"The quantity buyers are willing and able to buy at each price."},
+  {t:"Supply",d:"The quantity producers are willing and able to sell at each price."},
+  {t:"Equilibrium",d:"The price where quantity demanded equals quantity supplied."},
+  {t:"External cost",d:"A negative side-effect on people outside the transaction, like pollution."},
+  {t:"Substitute goods",d:"Goods that can be used in place of one another, like Coke and Pepsi."},
+  {t:"Price elastic demand",d:"Quantity demanded changes by a bigger % than the price."}
+ ],
+ dd:{title:"Shift it: demand or supply?",intro:"Drag each event into the box for what it does to the market. Watch the direction — does it <b>increase</b> or <b>decrease</b> demand or supply?",
+  bins:[{key:"Increases Demand",sub:"D shifts right"},{key:"Decreases Demand",sub:"D shifts left"},{key:"Increases Supply",sub:"S shifts right"},{key:"Decreases Supply",sub:"S shifts left"}],
+  items:[{label:"A rise in incomes (a normal good)",bin:"Increases Demand"},{label:"A successful advertising campaign",bin:"Increases Demand"},{label:"The price of a substitute falls",bin:"Decreases Demand"},{label:"Tastes shift away from the product",bin:"Decreases Demand"},{label:"New, more efficient technology",bin:"Increases Supply"},{label:"A fall in raw-material costs",bin:"Increases Supply"},{label:"The 2011 floods damage factories",bin:"Decreases Supply"},{label:"A new tax on producers",bin:"Decreases Supply"}]},
+ mcq:[
+  {q:"The law of demand states that, all else equal, as price rises…",o:["quantity demanded rises","quantity demanded falls","supply falls","demand shifts left"],a:1,fb:"Higher price → lower quantity demanded. This is a movement along the curve (a contraction)."},
+  {q:"A rise in quantity demanded caused only by a fall in price is called…",o:["an increase in demand","an extension in demand","a shift in demand","excess demand"],a:1,fb:"Price-only changes cause movements along the curve — an extension (down) or contraction (up)."},
+  {q:"Which would shift the supply curve of rice to the LEFT?",o:["A fall in fertiliser costs","A flood destroying the harvest","Better farming technology","A rise in the rice price"],a:1,fb:"A flood reduces supply at every price, shifting the whole curve left."},
+  {q:"At a price ABOVE equilibrium there will be…",o:["excess demand","excess supply","equilibrium","a shortage"],a:1,fb:"Too high a price → quantity supplied exceeds quantity demanded → a surplus (excess supply)."},
+  {q:"Demand for salt is price inelastic mainly because…",o:["it is expensive","it has few substitutes and is a tiny part of income","it is a luxury","it is taxed heavily"],a:1,fb:"Necessities with few substitutes that take little income tend to be inelastic."},
+  {q:"If a good has price elastic demand, a fall in price will cause total revenue to…",o:["fall","stay the same","rise","become zero"],a:2,fb:"When demand is elastic, the % rise in quantity outweighs the % fall in price, so revenue rises."},
+  {q:"Coffee and sugar are often consumed together, so they are…",o:["substitutes","complements","inferior goods","free goods"],a:1,fb:"Complements are used together; a price rise in one tends to lower demand for the other."},
+  {q:"Traffic pollution in Bangkok is an example of…",o:["a private cost","a negative externality","an external benefit","a free good"],a:1,fb:"It is a cost imposed on third parties not involved in the transaction — a negative externality."}
+ ],
+ exam:[
+  {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'equilibrium price'.",recipe:"2 marks → Term → Definition. Precise and accurate.",
+   model:`<span class="ss s-define" data-step="Define">Equilibrium price means</span> the price at which the quantity demanded equals the quantity supplied.`,
+   note:"One mark for linking it to a price, one for 'quantity demanded equals quantity supplied'. Keep it tight."},
+  {marks:4,cls:"mk4",cmd:"Explain with an example",q:"Explain, using an example, one reason why the demand for a product might increase.",recipe:"4 marks → Define → Example → Explain → Develop.",
+   model:`<span class="ss s-define" data-step="Define">Demand means</span> the quantity consumers are willing and able to buy at each price. <span class="ss s-example" data-step="Example">For example,</span> if incomes in Thailand rise, the demand for a normal good such as restaurant meals increases. <span class="ss s-explain" data-step="Explain">This happens because</span> consumers can now afford to eat out more often. <span class="ss s-explain" data-step="Develop">Therefore,</span> the whole demand curve shifts to the right.`,
+   note:"Note the key skill: a change in income shifts the whole curve (an increase in demand), not a movement along it. The example earns the applied mark."},
+  {marks:6,cls:"mk6",cmd:"Analyse",q:"Analyse how a bad harvest might affect the market for rice.",recipe:"6 marks → Define → Context → Chain of reasoning ×2 → Overall.",
+   model:`Rice is supplied by farmers and demanded by consumers. <span class="ss s-chain" data-step="Context">In Thailand,</span> a major rice exporter, a bad harvest such as the 2011 floods reduces the crop. <span class="ss s-chain" data-step="Effect 1">One effect is</span> that the supply of rice falls. <span class="ss s-chain" data-step="Chain">This leads to</span> a shift of the supply curve to the left. <span class="ss s-chain" data-step="Effect 2">Another effect is</span> that, with demand unchanged, there is now excess demand at the old price. <span class="ss s-chain" data-step="Chain">This increases</span> the price of rice, because consumers compete for the smaller quantity. <span class="ss s-chain" data-step="Chain">As a result,</span> the equilibrium price rises and the quantity traded falls. <span class="ss s-chain" data-step="Overall">Overall,</span> a bad harvest reduces supply, raising price and lowering quantity.`,
+   note:"A strong answer names the mechanism: supply shifts left → shortage at old price → price is bid up to a new equilibrium. That is the chain examiners reward."},
+  {marks:8,cls:"mk8",cmd:"Discuss",q:"Discuss whether a government should always intervene to correct market failure.",recipe:"8 marks → FOR → AGAINST → JUDGMENT.",
+   model:`<span class="ss s-for" data-step="For">One advantage of</span> government intervention is that it can reduce the harm from market failure. <span class="ss s-for" data-step="For">This means that</span> problems such as pollution can be controlled. <span class="ss s-for" data-step="For">For example,</span> the Thai government could tax factories that pollute Bangkok's air. <span class="ss s-for" data-step="For">This can lead to</span> less pollution. <span class="ss s-for" data-step="For">Therefore,</span> social welfare may improve because external costs fall.<br><br><span class="ss s-against" data-step="Against">However,</span> intervention is not always beneficial, because governments can make mistakes. <span class="ss s-against" data-step="Against">One problem is</span> that a tax may be set at the wrong level. <span class="ss s-against" data-step="Against">This can cause</span> firms to close and workers to lose jobs. <span class="ss s-against" data-step="Against">Another disadvantage is</span> that intervention costs money to run. <span class="ss s-against" data-step="Against">As a result,</span> resources may be wasted.<br><br><span class="ss s-judge" data-step="Judgment">Overall,</span> intervention tends to be worthwhile when the market failure is large and the benefits outweigh the costs. <span class="ss s-judge" data-step="Judgment">This depends on</span> how serious the failure is and how well the government can act. <span class="ss s-judge" data-step="Judgment">If</span> the failure is severe, such as dangerous pollution, then intervention is justified. <span class="ss s-judge" data-step="Judgment">However, if</span> the failure is minor, then intervention may do more harm than good. <span class="ss s-judge" data-step="Judgment">Therefore, I conclude that</span> a government should not always intervene — only when the gain to society is greater than the cost.`,
+   note:"The judgment weighs the size of the failure against the cost and competence of intervention. 'It depends on how serious the failure is' is the hinge of a top answer."}
+ ]
+},
+
+3:{
+ n:3, title:"Microeconomic Decision-Makers", topics:"3.1–3.7 · 7 topics", live:true,
+ tag:"Money, workers and firms — the decision-makers behind every Thai business.",
+ los:[
+  {c:"3.1 Money & Banking",o:["state the functions and characteristics of money","describe the roles of central and commercial banks"]},
+  {c:"3.2 Households",o:["explain the factors affecting household spending, saving and borrowing"]},
+  {c:"3.3 Workers",o:["explain how wages are determined by the demand for and supply of labour","explain the factors affecting choice of occupation","explain the role of trade unions"]},
+  {c:"3.4 Firms",o:["classify firms by type and size","explain why firms grow and the types of integration","explain why some firms remain small"]},
+  {c:"3.5 Firms & Production",o:["define and measure productivity","distinguish labour-intensive and capital-intensive production"]},
+  {c:"3.6 Costs, Revenues & Objectives",o:["calculate fixed, variable, total and average costs","calculate total revenue, average revenue and profit","explain economies and diseconomies of scale"]},
+  {c:"3.7 Types of Markets",o:["describe the features of a competitive market","describe the features of a monopoly","compare a competitive market with a monopoly"]}
+ ],
+ chapters:[
+  {id:"3.1",title:"Money & Banking",blurb:"Money works as a medium of exchange, a store of value, a unit of account and a means of deferred payment. The Bank of Thailand is the central bank; Bangkok Bank and Kasikornbank are commercial banks.",points:["Functions of money","Central bank","Commercial banks"],yt:"https://youtu.be/8vL7ycyX3Ns",nb:"https://notebooklm.google.com/notebook/81f03ffc-76c3-4932-bf9e-30d98f6ab78d"},
+  {id:"3.2",title:"Households",blurb:"Households decide how much to spend, save and borrow, shaped by income, interest rates and confidence. Higher disposable income usually means more spending — and more saving.",points:["Spending","Saving","Borrowing","Disposable income"],yt:"https://youtu.be/n51oBNDCOxM",nb:"https://notebooklm.google.com/notebook/20992856-2576-46ba-a811-30a80951cda3"},
+  {id:"3.3",title:"Workers",blurb:"Wages are set by the demand for and supply of labour, but workers also weigh non-wage factors. Trade unions bargain collectively, and Thailand sets a national minimum wage.",points:["Wage determination","Non-wage factors","Trade unions","Division of labour"],yt:"https://youtu.be/uRqzi7CdD_k",nb:"https://notebooklm.google.com/notebook/52ffcaab-0d25-4e57-8a8b-6ea5c40dfff4"},
+  {id:"3.4",title:"Firms",blurb:"Firms range from sole traders — a Bangkok street vendor — to giant multinationals like CP Group, which owns 7-Eleven in Thailand. Firms grow through integration, yet small firms still survive.",points:["Types of firm","Why firms grow","Integration","Why small firms survive"],yt:"https://youtu.be/cbDI0QUQyM0",nb:"https://notebooklm.google.com/notebook/6d0c73eb-2942-4538-b617-c27b8160f3e9"},
+  {id:"3.5",title:"Firms & Production",blurb:"Production combines factors to make output; productivity is output per worker. Thai rice farming is labour-intensive, while Rayong car plants are capital-intensive.",points:["Productivity","Demand for factors","Labour vs capital intensive"],yt:"https://youtu.be/SG6nbElpsRM",nb:"https://notebooklm.google.com/notebook/c1c3a595-1988-40de-bed7-49177fb20dbb"},
+  {id:"3.6",title:"Costs, Revenues & Objectives",blurb:"Firms face fixed and variable costs, earn revenue, and pursue objectives such as profit. Producing on a larger scale can bring economies of scale and lower average costs.",points:["Fixed & variable costs","Revenue & profit","Economies of scale","Objectives"],yt:"https://youtu.be/WMSr2r5I_5k",nb:"https://notebooklm.google.com/notebook/18b04dc5-ab7d-49ac-bef0-989542c8f09e"},
+  {id:"3.7",title:"Types of Markets",blurb:"Market structures range from perfect competition — the many similar street-food stalls in a Bangkok market — to monopoly, where one firm dominates, like the electricity supplier.",points:["Competitive markets","Monopoly","Characteristics"],yt:"https://youtu.be/yw-WMEm00pQ",nb:"https://notebooklm.google.com/notebook/a883fe64-4c1a-4894-b7b0-7c7f2517e916"}
+ ],
+ terms:[
+  {t:"Money",d:"A commodity that is universally accepted as payment for all goods and services.",e:"The stuff everyone agrees is worth something — from coffee to a new phone."},
+  {t:"Central bank",d:"The government's bank, responsible for issuing money and setting interest rates.",e:"The big boss bank — for Thailand, the Bank of Thailand."},
+  {t:"Commercial bank",d:"A High Street bank offering a range of accounts to individuals and businesses.",e:"Everyday banking — Bangkok Bank, Kasikorn, savings and loans."},
+  {t:"Disposable income",d:"The money available after paying taxes that you can choose how to use.",e:"Leftover cash after tax — treat yourself!"},
+  {t:"Specialisation",d:"Working on a specific stage of production to increase productivity and lower costs.",e:"Focus on one job, get really good, make stuff faster."},
+  {t:"Division of labour",d:"Splitting production into smaller tasks so workers specialise in specific areas.",e:"One person makes the dough, another shapes the bread!"},
+  {t:"Trades union",d:"An organisation of workers that negotiates wages, conditions and hours — collective bargaining.",e:"Workers team up for fair pay and decent conditions."},
+  {t:"Wage",d:"The hourly rate for labour, often calculated weekly.",e:"Paid for every hour you grind, usually weekly."},
+  {t:"Fixed costs",d:"Costs that do not change regardless of the level of output, such as rent.",e:"You pay them whether you make anything or not."},
+  {t:"Variable costs",d:"Costs that change with the level of output, such as raw materials.",e:"More output, more materials — costs that rise as you make more."},
+  {t:"Economies of scale",d:"When producing more reduces the cost per unit, e.g. through bulk buying.",e:"Make more, get cheaper at it — bulk-buying discounts!"},
+  {t:"Diseconomies of scale",d:"When a firm becomes too large and average costs start to rise due to inefficiency.",e:"Too big, too chaotic — costs creep back up."},
+  {t:"Monopoly",d:"When one firm controls all or nearly all of the market supply, with no competitors.",e:"The only seller — they can charge what they like."},
+  {t:"Profit",d:"The income remaining after total costs are subtracted from total revenue.",e:"The leftover cash after paying all the bills — your reward."},
+  {t:"Multinational Company (MNC)",d:"A company with production or outlets in more than one country.",e:"Going global and taking over — like CP Group."},
+  {t:"Productivity",d:"The amount of output produced by each worker, used to measure efficiency.",e:"How much each worker makes — the more, the better for the firm."}
+ ],
+ match:[
+  {t:"Money",d:"Anything universally accepted as payment for goods and services."},
+  {t:"Specialisation",d:"Focusing on a specific stage of production to raise productivity."},
+  {t:"Economies of scale",d:"Falling average cost per unit as a firm produces more."},
+  {t:"Monopoly",d:"One firm controls all or nearly all of the market supply."},
+  {t:"Fixed costs",d:"Costs that do not change with the level of output, like rent."},
+  {t:"Trades union",d:"A workers' organisation that bargains collectively over pay."}
+ ],
+ dd:{title:"Sort into Primary, Secondary or Tertiary industry",intro:"Drag each Thai job or business into the correct sector. <b>Primary</b> = extracting raw materials, <b>Secondary</b> = making goods, <b>Tertiary</b> = providing services.",
+  bins:[{key:"Primary",sub:"Extract raw materials"},{key:"Secondary",sub:"Make goods"},{key:"Tertiary",sub:"Provide services"}],
+  items:[{label:"Rice farming in the Central Plains",bin:"Primary"},{label:"Fishing in the Andaman Sea",bin:"Primary"},{label:"Tin and mineral mining",bin:"Primary"},{label:"A car assembly plant in Rayong",bin:"Secondary"},{label:"A garment factory",bin:"Secondary"},{label:"Building a Bangkok condominium",bin:"Secondary"},{label:"A Bangkok Bank branch",bin:"Tertiary"},{label:"A teacher at SISB",bin:"Tertiary"},{label:"A Grab delivery driver",bin:"Tertiary"}]},
+ mcq:[
+  {code:"3.1",tier:1,q:"Which of these is NOT a function of money?",o:["A medium of exchange","A store of value","A guarantee against inflation","A unit of account"],a:2,fb:"Money is a medium of exchange, store of value, unit of account and means of deferred payment. It does not protect against inflation."},
+  {code:"3.1",tier:2,q:"What is the main role of a central bank such as the Bank of Thailand?",o:["To collect sales tax from shops","To issue currency and set interest rates","To sell shares to the public","To set the price of every good"],a:1,fb:"A central bank issues the currency, sets the base interest rate and runs monetary policy."},
+  {code:"3.1",tier:1,q:"What does a commercial bank such as Bangkok Bank mainly do?",o:["Prints the nation's banknotes","Accepts deposits and lends to customers","Sets the country's base interest rate","Supervises all other banks"],a:1,fb:"Commercial banks take deposits and make loans; issuing money and setting rates is the central bank's job."},
+  {code:"3.1",tier:2,q:"Why is barter difficult compared with using money?",o:["There is too much money in circulation","It needs a double coincidence of wants","Prices are always fixed by law","Banks charge high fees"],a:1,fb:"Barter needs both people to want what the other offers — a double coincidence of wants. Money removes this problem."},
+  {code:"3.6",tier:1,q:"Which is most likely to be a fixed cost for a Bangkok coffee shop?",o:["The rent of the premises","The coffee beans used","The hourly pay of casual staff","The electricity used by the machines"],a:0,fb:"Fixed costs do not change with output. Rent is paid whatever the level of sales; the others rise as output rises."},
+  {code:"3.6",tier:1,q:"A firm has total fixed costs of $600. At an output of 4 units, what is its average fixed cost?",o:["$2400","$600","$150","$4"],a:2,fb:"AFC = total fixed cost ÷ output = 600 ÷ 4 = $150."},
+  {code:"3.6",tier:2,q:'The table shows the costs of a firm at an output of 5 units.<table class="qt"><tr><th>Total cost</th><td>$900</td></tr><tr><th>Total fixed cost</th><td>$400</td></tr></table>What is the average variable cost?',o:["$80","$100","$180","$500"],a:1,fb:"AVC = (total cost − total fixed cost) ÷ output = (900 − 400) ÷ 5 = $100."},
+  {code:"3.6",tier:1,q:"A noodle stall sells 200 bowls at $3 each. What is its total revenue?",o:["$60","$203","$600","$197"],a:2,fb:"Total revenue = price × quantity = 3 × 200 = $600."},
+  {code:"3.6",tier:2,q:"A firm earns total revenue of $1200 from selling 300 units. What is its average revenue?",o:["$4","$40","$900","$1500"],a:0,fb:"AR = total revenue ÷ quantity = 1200 ÷ 300 = $4. Average revenue equals the price per unit."},
+  {code:"3.6",tier:3,q:'The table shows the output and total revenue of a stall.<table class="qt"><tr><th>Output (units)</th><td>3</td><td>4</td><td>5</td></tr><tr><th>Total revenue ($)</th><td>60</td><td>80</td><td>95</td></tr></table>What is the marginal revenue of the 5th unit?',o:["$15","$19","$35","$95"],a:0,fb:"Marginal revenue is the extra revenue from one more unit = 95 − 80 = $15."},
+  {code:"3.6",tier:1,q:"A firm has total revenue of $5000 and total costs of $3500. What is its profit?",o:["$1500","$8500","$3500","$5000"],a:0,fb:"Profit = total revenue − total costs = 5000 − 3500 = $1500."},
+  {code:"3.6",tier:2,svg:'<svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><line x1="34" y1="12" x2="34" y2="128" stroke="#5a6b82" stroke-width="1.5"/><line x1="34" y1="128" x2="220" y2="128" stroke="#5a6b82" stroke-width="1.5"/><text x="16" y="78" font-size="9" fill="#5a6b82" transform="rotate(-90 16 78)">Cost ($)</text><text x="116" y="145" font-size="9" fill="#5a6b82">Output</text><path d="M44,20 C70,92 108,118 212,123" fill="none" stroke="#008BCC" stroke-width="2.5"/></svg>',q:"The diagram shows one of a firm's cost curves. Which cost does it represent?",o:["Total cost","Average fixed cost","Total fixed cost","Marginal cost"],a:1,fb:"A curve that falls steeply and flattens towards the axis (never reaching it) is average fixed cost — fixed cost spread over more and more units."},
+  {code:"3.3",tier:1,q:"A worker's wage is most likely to be high when…",o:["demand for the skill is high and supply is low","the supply of workers is very high","the job requires no training","almost anyone can do the job"],a:0,fb:"High demand for a skill combined with a low supply of able workers pushes the wage up."},
+  {code:"3.3",tier:2,q:"Which non-wage factor would most attract a worker to a job?",o:["Dangerous working conditions","Good promotion prospects","A very long daily commute","Unsocial working hours"],a:1,fb:"Good promotion prospects are a positive non-wage factor; the others are drawbacks."},
+  {code:"3.3",tier:2,q:"Which type of worker is most likely to be paid more?",o:["One in a job needing long training and few qualified people","An unskilled worker","A worker in plentiful supply","A worker anyone could replace"],a:0,fb:"Jobs needing long training have a smaller supply of qualified workers, so wages tend to be higher."},
+  {code:"3.3",tier:1,q:"As the wage offered for a job rises, the number of people willing to do it usually…",o:["falls","rises","stays the same","becomes zero"],a:1,fb:"A higher wage attracts more workers — the supply of labour rises."},
+  {code:"3.4",tier:1,q:"What is a trade union?",o:["A firm that controls a whole market","An organisation of workers that bargains over pay and conditions","A government tax department","A group of firms that fix prices"],a:1,fb:"A trade union represents workers and negotiates collectively for better pay and conditions."},
+  {code:"3.4",tier:2,q:"A trade union is most likely to raise its members' wages successfully when…",o:["the firm is making very low profits","the firm is very profitable and members are skilled","workers are easily replaced","unemployment is very high"],a:1,fb:"Bargaining power is strongest when the firm can afford higher pay and the workers are hard to replace."},
+  {code:"3.4",tier:3,q:"A possible disadvantage for the economy of higher union-negotiated wages is that…",o:["prices always fall","firms may employ fewer workers","profits always rise","exports automatically increase"],a:1,fb:"If wages rise above the market rate, firms may cut jobs or hire fewer workers — a possible rise in unemployment."},
+  {code:"3.7",tier:1,q:"A monopoly is a market with…",o:["many small sellers","one dominant seller","exactly two large firms","no sellers at all"],a:1,fb:"A monopoly is dominated by a single seller with high barriers to entry."},
+  {code:"3.7",tier:1,q:"Compared with a competitive market, a monopoly is more likely to charge…",o:["lower prices","higher prices","no prices","exactly the same prices"],a:1,fb:"With no close competitors, a monopoly can act as a price maker and charge more."},
+  {code:"3.7",tier:3,q:"Which is a possible advantage of a monopoly for consumers?",o:["It always lowers product quality","It may gain economies of scale and pass on lower costs","It offers less choice","It faces no pressure to improve"],a:1,fb:"A large monopoly can achieve economies of scale; if it passes the savings on, consumers may pay less."},
+  {code:"3.5",tier:1,q:"Economies of scale mean that, as a firm grows, its…",o:["average cost per unit falls","total cost falls to zero","total revenue falls","output falls"],a:0,fb:"Economies of scale reduce the average cost per unit as output rises, e.g. through bulk buying."},
+  {code:"3.5",tier:2,q:"A car manufacturer merges with a tyre company that supplies it. This is an example of…",o:["horizontal integration","vertical integration","a conglomerate merger","a cartel"],a:1,fb:"Merging with a firm at a different stage of the same production chain (a supplier) is vertical integration."}
+ ],
+ exam:[
+  {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'economies of scale'.",recipe:"2 marks → Term → Definition. Precise and accurate.",
+   model:`<span class="ss s-define" data-step="Define">Economies of scale means</span> the fall in average cost per unit that a firm experiences as it increases its scale of production.`,
+   note:"The two marks hinge on 'average cost per unit' falling AND it being linked to a larger scale of production. 'Costs fall' alone is too vague."},
+  {marks:4,cls:"mk4",cmd:"Explain with an example",q:"Explain, using an example, two functions of money.",recipe:"4 marks → Define → Example → Explain → Develop.",
+   model:`<span class="ss s-define" data-step="Define">Money is</span> anything widely accepted as payment. <span class="ss s-example" data-step="Example">For example,</span> the Thai baht acts as a medium of exchange when you buy food at a market. <span class="ss s-explain" data-step="Explain">This happens because</span> both buyer and seller accept it, removing the need to barter. <span class="ss s-explain" data-step="Develop">Therefore,</span> money also acts as a store of value, because baht can be saved now and spent later.`,
+   note:"The question asks for TWO functions — here, medium of exchange and store of value, each with a reason. Don't stop after one."},
+  {marks:6,cls:"mk6",cmd:"Analyse",q:"Analyse how a firm might benefit from growing larger.",recipe:"6 marks → Define → Context → Chain of reasoning ×2 → Overall.",
+   model:`A firm grows by increasing its scale of production. <span class="ss s-chain" data-step="Context">In Thailand,</span> a firm such as CP Group has grown very large. <span class="ss s-chain" data-step="Effect 1">One effect is</span> that the firm can buy materials in bulk. <span class="ss s-chain" data-step="Chain">This leads to</span> lower costs per unit, because suppliers offer discounts. <span class="ss s-chain" data-step="Effect 2">Another effect is</span> that the firm can use specialised machinery. <span class="ss s-chain" data-step="Chain">This increases</span> productivity, because output per worker rises. <span class="ss s-chain" data-step="Chain">As a result,</span> average costs fall — the firm enjoys economies of scale. <span class="ss s-chain" data-step="Overall">Overall,</span> growing larger can lower average costs and let the firm compete on price.`,
+   note:"Two distinct economies of scale (bulk-buying and technical), each followed through to lower average cost. Naming the type — 'economies of scale' — shows command of the term."},
+  {marks:8,cls:"mk8",cmd:"Discuss",q:"Discuss whether a monopoly is always bad for consumers.",recipe:"8 marks → FOR → AGAINST → JUDGMENT.",
+   model:`<span class="ss s-for" data-step="For">One disadvantage of</span> a monopoly is that, with no competitors, it can charge higher prices. <span class="ss s-for" data-step="For">This means that</span> consumers pay more than in a competitive market. <span class="ss s-for" data-step="For">For example,</span> a single electricity supplier could raise prices knowing buyers have no alternative. <span class="ss s-for" data-step="For">This can lead to</span> lower consumer welfare. <span class="ss s-for" data-step="For">Therefore,</span> consumers may be worse off, paying more for less choice.<br><br><span class="ss s-against" data-step="Against">However,</span> a monopoly is not always bad, because its large size can bring economies of scale. <span class="ss s-against" data-step="Against">One point is</span> that lower average costs could mean lower prices. <span class="ss s-against" data-step="Against">This can cause</span> consumers to benefit if savings are passed on. <span class="ss s-against" data-step="Against">Another advantage is</span> that large profits can fund research. <span class="ss s-against" data-step="Against">As a result,</span> products may improve over time.<br><br><span class="ss s-judge" data-step="Judgment">Overall,</span> a monopoly tends to be bad when it abuses its power to raise prices, but not when it shares the benefits of its scale. <span class="ss s-judge" data-step="Judgment">This depends on</span> whether the government regulates it. <span class="ss s-judge" data-step="Judgment">If</span> the firm is regulated, then prices can be kept fair. <span class="ss s-judge" data-step="Judgment">However, if</span> it is unregulated, then it may exploit consumers. <span class="ss s-judge" data-step="Judgment">Therefore, I conclude that</span> a monopoly is not always bad — the outcome depends on regulation and whether economies of scale are passed on.`,
+   note:"Because the statement is negative ('always bad'), the FOR paragraph gives reasons it IS bad. Adapting the starter wording to the question — 'One disadvantage of a monopoly…' — is exactly the skill examiners reward."}
+ ]
+},
+
+4:{
+ n:4, title:"Government & the Macroeconomy", topics:"4.1–4.8 · 8 topics", live:true,
+ tag:"Taxes, spending and interest rates — how the Thai government steers the whole economy.",
+ los:[
+  {c:"4.1 The Role of Government",o:["describe the roles of government as producer, employer and regulator","explain the aims of government intervention"]},
+  {c:"4.2 Macroeconomic Aims of Government",o:["state the main macroeconomic aims of government","explain how these aims can conflict with one another"]},
+  {c:"4.3 Fiscal Policy",o:["define fiscal policy and distinguish direct from indirect taxes","explain budget deficits and surpluses","explain expansionary and contractionary fiscal policy"]},
+  {c:"4.4 Monetary Policy",o:["define monetary policy","explain how changing interest rates affects the economy"]},
+  {c:"4.5 Supply-Side Policy",o:["explain what supply-side policies are","give examples and explain how they raise productive capacity"]},
+  {c:"4.6 Economic Growth",o:["define economic growth and real GDP","explain the benefits and costs of growth"]},
+  {c:"4.7 Employment & Unemployment",o:["explain how unemployment is measured","identify the types and causes of unemployment","explain the consequences of unemployment"]},
+  {c:"4.8 Inflation & Deflation",o:["define inflation and deflation and explain the CPI","distinguish demand-pull from cost-push inflation","explain the consequences of inflation"]}
+ ],
+ chapters:[
+  {id:"4.1",title:"The Role of Government",blurb:"Government acts as a producer (state enterprises such as PTT and the electricity authority), an employer of millions, and a regulator. It intervenes to correct market failure and to stabilise the economy.",points:["Producer","Employer","Regulator","Aims of intervention"],yt:"https://youtu.be/ef1VKpbkQMM",nb:"https://notebooklm.google.com/notebook/1b916912-3e22-4c5c-8f26-641bc93f8343"},
+  {id:"4.2",title:"Macroeconomic Aims of Government",blurb:"The big aims: steady economic growth, low unemployment, low and stable inflation, and a healthy balance of payments — plus fairer income distribution. These aims often conflict; fast growth, for example, can push up inflation.",points:["Growth","Full employment","Price stability","Balance of payments","Conflicts"],yt:"https://youtu.be/5cCj4eK4Sfo",nb:"https://notebooklm.google.com/notebook/959e179d-ce3a-4c12-9fb3-af59cb728cd1"},
+  {id:"4.3",title:"Fiscal Policy",blurb:"Using government spending and taxation to influence the economy. Cutting taxes or raising spending is expansionary; raising taxes or cutting spending is contractionary. Taxes are direct (income tax) or indirect (VAT).",points:["Government spending","Taxation","Budget positions","Direct vs indirect tax"],yt:"https://youtu.be/mV5GXrXIsaM",nb:"https://notebooklm.google.com/notebook/f1d64d98-5727-437b-921a-7f5ba907e6f8"},
+  {id:"4.4",title:"Monetary Policy",blurb:"The central bank — the Bank of Thailand — changes interest rates and influences the money supply to manage demand and inflation. Lower rates make borrowing cheaper and tend to boost spending.",points:["Interest rates","Money supply","Bank of Thailand"],yt:"https://youtu.be/2_36NDGcdnM",nb:"https://notebooklm.google.com/notebook/dbdba4fb-830a-48b2-9ce7-f3dc72816fd6"},
+  {id:"4.5",title:"Supply-Side Policy",blurb:"Policies that raise the economy's productive capacity — education, training, infrastructure and incentives such as Thailand's BOI investment promotion. Done well, they shift the PPC outward.",points:["Education & training","Infrastructure","Incentives","Productive capacity"],yt:"https://youtu.be/fRr8R_YDMfM",nb:"https://notebooklm.google.com/notebook/b2696df6-7fe7-47ac-a9f0-e7db406f704e"},
+  {id:"4.6",title:"Economic Growth",blurb:"A rise in real GDP — the value of output after stripping out inflation. Measured per capita to compare living standards. Growth brings higher incomes and jobs, but also pollution and resource use.",points:["Real GDP","GDP per capita","Benefits","Costs"],yt:"https://youtu.be/6ANHkivbXAs",nb:"https://notebooklm.google.com/notebook/8b5c65f9-41a0-48a6-93fd-27079c479be3"},
+  {id:"4.7",title:"Employment & Unemployment",blurb:"Who is working and who cannot find work. Types include cyclical, structural, frictional and seasonal. Thailand's tourism creates a clear seasonal pattern of jobs.",points:["Measuring unemployment","Types","Causes","Consequences"],yt:"https://youtu.be/PJf_LawzAXU",nb:"https://notebooklm.google.com/notebook/d4d1977b-08ca-4934-a54a-fdcf224d725d"},
+  {id:"4.8",title:"Inflation & Deflation",blurb:"A sustained rise (inflation) or fall (deflation) in the general price level, measured by the Consumer Price Index. Causes are demand-pull (too much spending) and cost-push (rising costs such as oil).",points:["CPI","Demand-pull","Cost-push","Consequences"],yt:"https://youtu.be/_zctycVDCoc",nb:"https://notebooklm.google.com/notebook/15128c5f-2226-4c43-b630-0a82cc5201e4"}
+ ],
+ terms:[
+  {t:"Aggregate demand",d:"Total demand in the economy: consumption + investment + government spending + net exports.",e:"Everything everyone wants to buy, all added up."},
+  {t:"Fiscal policy",d:"The use of government spending and taxation to influence the economy.",e:"The government plays with tax and spending to speed up or slow down the economy."},
+  {t:"Monetary policy",d:"The use of interest rates and the money supply, usually by the central bank, to influence the economy.",e:"The central bank turning the interest-rate dial."},
+  {t:"Direct taxes",d:"Taxes levied on income and wealth, such as income tax and corporation tax.",e:"Taken straight out of your pay or wealth."},
+  {t:"Indirect taxes",d:"Taxes on spending, such as VAT, excise duties and import taxes.",e:"A sneaky extra charge when you buy something."},
+  {t:"Progressive taxes",d:"A tax taking a higher percentage of income from higher earners than lower earners.",e:"The richer you are, the bigger the slice you pay."},
+  {t:"Regressive taxes",d:"A tax taking a higher percentage of income from lower earners than higher earners.",e:"Hits poorer people harder — like a flat sales tax."},
+  {t:"Budget deficit",d:"When government spending is greater than its income in a given period.",e:"Spending more than your allowance — time to borrow!"},
+  {t:"Budget surplus",d:"When government income from taxes exceeds its spending in a given period.",e:"More in savings than you spent — nice."},
+  {t:"Interest rates",d:"The cost of borrowing money or the reward for saving.",e:"The price of borrowing — set off the central bank's base rate."},
+  {t:"Gross Domestic Product (GDP)",d:"The total value of all goods and services produced in a country in a time period.",e:"Everything the country makes — if it were one big factory, how much did it produce?"},
+  {t:"Real GDP",d:"GDP adjusted to remove the effects of inflation, showing output in constant prices.",e:"Are we really making more, or just paying more for the same stuff?"},
+  {t:"GDP per capita",d:"GDP divided by the population, giving output per person.",e:"How much the country makes per head — handy for comparing living standards."},
+  {t:"Consumer Price Index (CPI)",d:"A measure of inflation tracking the change in price of a basket of goods households buy.",e:"How much more your shopping costs now than before."},
+  {t:"Unemployment",d:"When people who are willing and able to work cannot find a job.",e:"Wanting to work but the economy isn't handing out enough jobs."},
+  {t:"Multiplier effect",d:"When an initial rise in spending leads to a larger overall rise in national income.",e:"Money keeps getting passed on — a snowball of spending."}
+ ],
+ match:[
+  {t:"Fiscal policy",d:"Using government spending and taxation to influence the economy."},
+  {t:"Monetary policy",d:"Using interest rates and the money supply to influence the economy."},
+  {t:"Direct tax",d:"A tax on income or wealth, such as income tax."},
+  {t:"Progressive tax",d:"Takes a larger percentage of income from higher earners."},
+  {t:"GDP",d:"The total value of goods and services a country produces."},
+  {t:"Budget deficit",d:"When government spending is greater than its income."}
+ ],
+ dd:{title:"Fiscal, monetary or supply-side?",intro:"Drag each policy into the right box. <b>Fiscal</b> = spending & tax, <b>Monetary</b> = interest rates & money supply, <b>Supply-side</b> = raising capacity.",
+  bins:[{key:"Fiscal",sub:"Spending & tax"},{key:"Monetary",sub:"Interest & money"},{key:"Supply-side",sub:"Raise capacity"}],
+  items:[{label:"Cutting income tax to boost spending",bin:"Fiscal"},{label:"Raising VAT",bin:"Fiscal"},{label:"Increasing government spending on welfare",bin:"Fiscal"},{label:"The Bank of Thailand raising interest rates",bin:"Monetary"},{label:"Lowering the base interest rate",bin:"Monetary"},{label:"Reducing the money supply",bin:"Monetary"},{label:"Investing in education and training",bin:"Supply-side"},{label:"Building new infrastructure",bin:"Supply-side"},{label:"Improving worker skills and productivity",bin:"Supply-side"}]},
+ mcq:[
+  {q:"Which of these is a direct tax?",o:["VAT","Income tax","Excise duty on fuel","Import tariff"],a:1,fb:"Direct taxes are charged on income or wealth (income tax). The others are taxes on spending — indirect."},
+  {q:"To reduce inflation, a central bank would most likely…",o:["cut interest rates","raise interest rates","increase the money supply","cut income tax"],a:1,fb:"Higher interest rates reduce borrowing and spending, easing demand-pull inflation."},
+  {q:"A budget deficit occurs when…",o:["tax revenue exceeds spending","spending exceeds tax revenue","the budget is balanced","exports exceed imports"],a:1,fb:"Spending greater than revenue → a deficit, usually financed by borrowing."},
+  {q:"Real GDP differs from nominal GDP because it…",o:["includes exports","removes the effect of inflation","is measured per person","ignores services"],a:1,fb:"Real GDP is adjusted for inflation, so it shows changes in actual output."},
+  {q:"Unemployment caused by a general downturn in the economy is…",o:["frictional","seasonal","cyclical","structural"],a:2,fb:"Cyclical unemployment rises in a recession when total demand falls."},
+  {q:"Under a progressive tax, as income rises the proportion paid in tax…",o:["falls","stays the same","rises","becomes zero"],a:2,fb:"Progressive taxes take a higher percentage from higher earners."},
+  {q:"Tourism workers losing jobs in the rainy low season is an example of…",o:["structural unemployment","seasonal unemployment","cyclical unemployment","frictional unemployment"],a:1,fb:"Seasonal unemployment follows predictable yearly patterns of demand."},
+  {q:"Expansionary fiscal policy involves…",o:["higher taxes and lower spending","lower taxes and/or higher spending","raising interest rates","reducing the money supply"],a:1,fb:"To expand demand, the government cuts taxes and/or raises spending."}
+ ],
+ exam:[
+  {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'fiscal policy'.",recipe:"2 marks → Term → Definition.",
+   model:`<span class="ss s-define" data-step="Define">Fiscal policy means</span> the use of government spending and taxation to influence the level of economic activity.`,
+   note:"Both elements — government spending AND taxation — are needed for full marks. 'Government taxes' alone is incomplete."},
+  {marks:4,cls:"mk4",cmd:"Explain with an example",q:"Explain, using an example, one supply-side policy a government could use.",recipe:"4 marks → Define → Example → Explain → Develop.",
+   model:`<span class="ss s-define" data-step="Define">A supply-side policy means</span> a measure designed to increase the economy's productive capacity. <span class="ss s-example" data-step="Example">For example,</span> the Thai government could invest more in education and training. <span class="ss s-explain" data-step="Explain">This happens because</span> better-skilled workers are more productive. <span class="ss s-explain" data-step="Develop">Therefore,</span> the economy can produce more, shifting the PPC outward.`,
+   note:"Link the policy to productive capacity — that is the defining feature of a supply-side policy and what separates it from fiscal/monetary."},
+  {marks:6,cls:"mk6",cmd:"Analyse",q:"Analyse how a cut in interest rates might affect an economy.",recipe:"6 marks → Define → Context → Chain ×2 → Overall.",
+   model:`Interest rates are the cost of borrowing money. <span class="ss s-chain" data-step="Context">In Thailand,</span> the Bank of Thailand might cut its base rate. <span class="ss s-chain" data-step="Effect 1">One effect is</span> that borrowing becomes cheaper. <span class="ss s-chain" data-step="Chain">This leads to</span> more spending by households and more investment by firms, because loans cost less. <span class="ss s-chain" data-step="Effect 2">Another effect is</span> that aggregate demand rises. <span class="ss s-chain" data-step="Chain">This increases</span> output and employment, because firms produce more to meet demand. <span class="ss s-chain" data-step="Chain">As a result,</span> economic growth may rise — though inflation could too. <span class="ss s-chain" data-step="Overall">Overall,</span> a rate cut tends to boost demand, growth and jobs, with a risk of higher inflation.`,
+   note:"The chain runs cheaper borrowing → more spending/investment → higher AD → growth and jobs. Naming the risk (inflation) shows analytical balance."},
+  {marks:8,cls:"mk8",cmd:"Discuss",q:"Discuss whether economic growth always improves living standards.",recipe:"8 marks → FOR → AGAINST → JUDGMENT.",
+   model:`<span class="ss s-for" data-step="For">One advantage of</span> economic growth is that it raises incomes. <span class="ss s-for" data-step="For">This means that</span> people can afford more goods and services. <span class="ss s-for" data-step="For">For example,</span> as Thailand has grown, more households can afford healthcare and education. <span class="ss s-for" data-step="For">This can lead to</span> longer, healthier lives. <span class="ss s-for" data-step="For">Therefore,</span> living standards may improve.<br><br><span class="ss s-against" data-step="Against">However,</span> growth does not always improve living standards, because the benefits may be unevenly shared. <span class="ss s-against" data-step="Against">One problem is</span> that the rich may gain far more than the poor. <span class="ss s-against" data-step="Against">This can cause</span> rising inequality. <span class="ss s-against" data-step="Against">Another disadvantage is</span> that growth can bring pollution and congestion, as seen in Bangkok. <span class="ss s-against" data-step="Against">As a result,</span> quality of life may fall for some.<br><br><span class="ss s-judge" data-step="Judgment">Overall,</span> growth tends to improve living standards when its benefits are widely shared and the environment is protected. <span class="ss s-judge" data-step="Judgment">This depends on</span> how the extra income is distributed and the type of growth. <span class="ss s-judge" data-step="Judgment">If</span> growth is inclusive and sustainable, then living standards rise. <span class="ss s-judge" data-step="Judgment">However, if</span> it mainly benefits a few and damages the environment, then it may not. <span class="ss s-judge" data-step="Judgment">Therefore, I conclude that</span> economic growth does not always improve living standards — it depends on distribution and sustainability.`,
+   note:"Strong answers separate growth (more output) from development (broader wellbeing). The judgment hinges on distribution and environmental cost."}
+ ]
+},
+
+5:{
+ n:5, title:"Economic Development", topics:"5.1–5.4 · 4 topics", live:true,
+ tag:"Living standards, poverty and population — comparing Thailand with the world.",
+ los:[
+  {c:"5.1 Living Standards",o:["explain how living standards are measured by GDP per capita","explain the Human Development Index and why it is used","explain the limitations of GDP as a measure"]},
+  {c:"5.2 Poverty",o:["distinguish absolute from relative poverty","explain the causes of poverty","explain policies to reduce poverty"]},
+  {c:"5.3 Population",o:["explain the causes of population change and migration","interpret a population pyramid","explain the dependency ratio and optimum population"]},
+  {c:"5.4 Differences in Economic Development",o:["compare more and less developed countries","explain the causes of differences in development"]}
+ ],
+ chapters:[
+  {id:"5.1",title:"Living Standards",blurb:"How well people live, measured by GDP per capita and broader measures such as the Human Development Index, which adds health and education. Money alone doesn't capture wellbeing.",points:["GDP per capita","HDI","Limitations of GDP"],yt:"https://youtu.be/Zf0arjAJytI",nb:"https://notebooklm.google.com/notebook/423d6222-6ca9-49e9-8968-1529c8b774d7"},
+  {id:"5.2",title:"Poverty",blurb:"Absolute poverty (unable to afford basic needs) versus relative poverty (poor compared with others). Thailand has cut absolute poverty sharply since the 1980s, but inequality remains, especially between Bangkok and rural regions.",points:["Absolute vs relative","Causes","Policies to reduce poverty"],yt:"https://youtu.be/XwG1MYsC48M",nb:"https://notebooklm.google.com/notebook/d3c67a14-2093-45b8-a190-bfd21b559967"},
+  {id:"5.3",title:"Population",blurb:"Birth rates, death rates and migration shape the size and age structure of a population, shown in a population pyramid. Thailand now faces an ageing population and a rising dependency ratio.",points:["Population change","Pyramids","Dependency ratio","Optimum population"],yt:"https://youtu.be/PwQFfZvrl3E",nb:"https://notebooklm.google.com/notebook/7d062195-dbb3-4ef9-ba9d-84e027a826ec"},
+  {id:"5.4",title:"Differences in Economic Development",blurb:"Why countries differ in development, and how more developed countries (MDCs) and less developed countries (LDCs) compare on income, economic structure and HDI.",points:["MDC vs LDC","Causes of difference","Comparing economies"],yt:"https://youtu.be/Yc8GoHmm9Q4",nb:"https://notebooklm.google.com/notebook/cb566a5e-1441-4239-9bbf-0641957524fd"}
+ ],
+ terms:[
+  {t:"Human Development Index (HDI)",d:"A measure of development combining life expectancy, education and income, scored 0 to 1.",e:"Closer to 1 = people live longer, learn more and earn more."},
+  {t:"Less Developed Country (LDC)",d:"A country with lower income, lower living standards and lower human development.",e:"Less wealth, weaker healthcare and fewer opportunities — often more poverty."},
+  {t:"More Developed Country (MDC)",d:"A country with high income, high living standards and advanced infrastructure.",e:"Wealthy, with good healthcare, education and comfy lifestyles."},
+  {t:"Purchasing Power Parity (PPP)",d:"A way of comparing currencies by what a given amount of money can actually buy in each country.",e:"Like comparing the price of a Big Mac across countries."},
+  {t:"Demography",d:"The study of population characteristics such as birth rates, death rates and migration.",e:"People-watching with a purpose — who, how old, and where."},
+  {t:"Dependency ratio",d:"The proportion of the population that is dependent (young and old) relative to the working-age population.",e:"How many non-workers each worker has to support."},
+  {t:"Optimum population",d:"The population size that gets the best use of resources and the highest living standards.",e:"The 'Goldilocks' number — not too many, not too few."},
+  {t:"Over-population",d:"When population exceeds available resources, lowering living standards.",e:"Too many people for the resources — something's gotta give."},
+  {t:"Under-population",d:"When there are too few people to use a country's resources fully.",e:"Loads of space and resources, but not enough people to use them."},
+  {t:"Population pyramids",d:"A graph showing the age and sex structure of a population.",e:"A country's demographics drawn as a picture."},
+  {t:"Old dependents",d:"People typically over 65 who rely on the working population for support.",e:"Retired folk relying on workers for pensions and care."},
+  {t:"Primary industry",d:"Industries that extract raw materials, such as farming, fishing and mining.",e:"The 'dig it up / grow it' industries."},
+  {t:"Tertiary industry",d:"Industries that provide services, such as banking, education and healthcare.",e:"The 'helping people' industries."}
+ ],
+ match:[
+  {t:"HDI",d:"A 0–1 measure combining health, education and income."},
+  {t:"LDC",d:"A country with low income and low human development."},
+  {t:"MDC",d:"A high-income country with advanced infrastructure."},
+  {t:"Dependency ratio",d:"Dependents as a share of the working-age population."},
+  {t:"Optimum population",d:"The size that gives the highest living standards."},
+  {t:"PPP",d:"Comparing what money can actually buy across countries."}
+ ],
+ dd:{title:"More developed or less developed?",intro:"Drag each feature into the type of economy it best describes. Think about income, structure of industry, and human development.",
+  bins:[{key:"More Developed (MDC)",sub:"e.g. Japan, Germany"},{key:"Less Developed (LDC)",sub:"e.g. low-income nations"}],
+  items:[{label:"High GDP per capita",bin:"More Developed (MDC)"},{label:"High life expectancy",bin:"More Developed (MDC)"},{label:"Large service (tertiary) sector",bin:"More Developed (MDC)"},{label:"HDI close to 1",bin:"More Developed (MDC)"},{label:"Low income per head",bin:"Less Developed (LDC)"},{label:"Many workers in farming (primary)",bin:"Less Developed (LDC)"},{label:"Lower life expectancy",bin:"Less Developed (LDC)"},{label:"Lower HDI score",bin:"Less Developed (LDC)"}]},
+ mcq:[
+  {q:"The Human Development Index combines income with…",o:["exports and imports","life expectancy and education","inflation and unemployment","tax and spending"],a:1,fb:"HDI = income + health (life expectancy) + education, giving a broader picture than GDP alone."},
+  {q:"GDP per capita is calculated by…",o:["adding exports and imports","dividing GDP by the population","multiplying GDP by inflation","dividing GDP by the workforce"],a:1,fb:"Per capita means 'per person' — GDP divided by population."},
+  {q:"A high dependency ratio means…",o:["most people are of working age","a large share of dependents relative to workers","high exports","low inflation"],a:1,fb:"More young and old dependents per worker raises the burden on the working population."},
+  {q:"Which is typical of a less developed country?",o:["A large service sector","Most workers in agriculture","Very high GDP per capita","An HDI near 1"],a:1,fb:"LDCs tend to have a large primary sector and lower income and HDI."},
+  {q:"Purchasing Power Parity is used to…",o:["measure unemployment","compare what money can buy across countries","calculate tariffs","track inflation only"],a:1,fb:"PPP adjusts for price differences so living standards can be compared fairly."},
+  {q:"An ageing population tends to…",o:["lower the dependency ratio","raise the dependency ratio","raise the birth rate","reduce life expectancy"],a:1,fb:"More elderly dependents per worker pushes the dependency ratio up — a challenge Thailand now faces."},
+  {q:"Absolute poverty refers to…",o:["being poorer than your neighbours","being unable to afford basic necessities","having below-average income","paying high taxes"],a:1,fb:"Absolute poverty = lacking the income for basic needs; relative poverty is being poor compared with others."},
+  {q:"Compared with GDP, the HDI is a better measure of development because it…",o:["is easier to calculate","includes health and education, not just income","ignores population","only counts exports"],a:1,fb:"HDI captures wellbeing more fully by adding health and education to income."}
+ ],
+ exam:[
+  {marks:2,cls:"mk2",cmd:"Define",q:"Define the Human Development Index (HDI).",recipe:"2 marks → Term → Definition.",
+   model:`<span class="ss s-define" data-step="Define">The Human Development Index means</span> a measure of development that combines life expectancy, education and income into a single score between 0 and 1.`,
+   note:"Naming at least two of the three components (health, education, income) secures the second mark."},
+  {marks:4,cls:"mk4",cmd:"Explain with an example",q:"Explain, using an example, one cause of poverty in a country.",recipe:"4 marks → Define → Example → Explain → Develop.",
+   model:`<span class="ss s-define" data-step="Define">Poverty means</span> being unable to afford the basic necessities of life. <span class="ss s-example" data-step="Example">For example,</span> in rural areas of a developing country, low education levels are common. <span class="ss s-explain" data-step="Explain">This happens because</span> people without education can only find low-paid work. <span class="ss s-explain" data-step="Develop">Therefore,</span> their incomes stay low and they remain trapped in poverty.`,
+   note:"Pick one clear cause (low education, unemployment, poor health) and follow it through to low income — don't list many causes thinly."},
+  {marks:6,cls:"mk6",cmd:"Analyse",q:"Analyse how a rapidly growing population might affect a developing country.",recipe:"6 marks → Define → Context → Chain ×2 → Overall.",
+   model:`A rapidly growing population means the number of people is rising quickly. <span class="ss s-chain" data-step="Context">In a developing country,</span> birth rates are often high. <span class="ss s-chain" data-step="Effect 1">One effect is</span> that there are more dependants to feed and educate. <span class="ss s-chain" data-step="Chain">This leads to</span> pressure on resources such as schools and hospitals, because demand for services rises faster than supply. <span class="ss s-chain" data-step="Effect 2">Another effect is</span> that, in the long run, the workforce grows. <span class="ss s-chain" data-step="Chain">This increases</span> the potential output of the economy, because there are more workers. <span class="ss s-chain" data-step="Overall">Overall,</span> a growing population can strain resources in the short term but expand the workforce later.`,
+   note:"Balance is rewarded: short-term strain on services versus the longer-term gain of a larger workforce."},
+  {marks:8,cls:"mk8",cmd:"Discuss",q:"Discuss whether GDP per capita is the best measure of a country's living standards.",recipe:"8 marks → FOR → AGAINST → JUDGMENT.",
+   model:`<span class="ss s-for" data-step="For">One advantage of</span> GDP per capita is that it gives a clear figure for average income. <span class="ss s-for" data-step="For">This means that</span> living standards can be compared between countries. <span class="ss s-for" data-step="For">For example,</span> a much higher GDP per capita in one country usually signals more goods and services per person. <span class="ss s-for" data-step="For">This can lead to</span> a useful, simple comparison. <span class="ss s-for" data-step="For">Therefore,</span> it is widely used.<br><br><span class="ss s-against" data-step="Against">However,</span> GDP per capita is not always the best measure, because it is only an average. <span class="ss s-against" data-step="Against">One problem is</span> that it ignores how income is distributed. <span class="ss s-against" data-step="Against">This can cause</span> a misleading picture if a few are very rich. <span class="ss s-against" data-step="Against">Another disadvantage is</span> that it ignores health, education and the environment. <span class="ss s-against" data-step="Against">As a result,</span> it may overstate true wellbeing.<br><br><span class="ss s-judge" data-step="Judgment">Overall,</span> GDP per capita is useful as a quick guide but not the best single measure. <span class="ss s-judge" data-step="Judgment">This depends on</span> what we are trying to capture. <span class="ss s-judge" data-step="Judgment">If</span> we only want average income, then it works. <span class="ss s-judge" data-step="Judgment">However, if</span> we want overall wellbeing, then a broader measure such as the HDI is better. <span class="ss s-judge" data-step="Judgment">Therefore, I conclude that</span> GDP per capita is not the best measure on its own — it should be used alongside indicators like the HDI.`,
+   note:"The judgment should reach for the HDI as the broader alternative — that comparison is exactly what examiners look for here."}
+ ]
+},
+
+6:{
+ n:6, title:"International Trade & Globalisation", topics:"6.1–6.4 · 4 topics", live:true,
+ tag:"Trade, exchange rates and globalisation — Thailand inside the world economy.",
+ los:[
+  {c:"6.1 International Specialisation",o:["explain absolute and comparative advantage","explain the benefits and risks of specialisation and trade"]},
+  {c:"6.2 Globalisation, Free Trade & Protection",o:["explain globalisation and free trade","describe methods of protection (tariffs, quotas, subsidies, embargoes)","evaluate the arguments for and against protection"]},
+  {c:"6.3 Foreign Exchange",o:["explain how exchange rates are determined","distinguish floating from fixed exchange rates","explain the effects of a change in the exchange rate"]},
+  {c:"6.4 Current Account / Balance of Payments",o:["describe the components of the current account","explain the meaning of a deficit and a surplus"]}
+ ],
+ chapters:[
+  {id:"6.1",title:"International Specialisation",blurb:"Countries specialise in what they produce relatively best (absolute and comparative advantage), then trade. Thailand specialises in rice, tourism and car manufacturing and trades for what it lacks.",points:["Absolute advantage","Comparative advantage","Benefits & risks"],yt:"https://youtu.be/8RyDI0g-ZJE",nb:"https://notebooklm.google.com/notebook/ffc62f7f-4b37-4ee1-989b-17a89632a51b"},
+  {id:"6.2",title:"Globalisation, Free Trade & Protection",blurb:"Globalisation links economies more closely; free trade removes barriers. Governments may still protect home industries using tariffs, quotas, subsidies and embargoes — for example to shield infant industries.",points:["Globalisation","Free trade","Protection methods","Arguments"],yt:"https://youtu.be/tbeEyCB3FnI",nb:"https://notebooklm.google.com/notebook/44a26582-bbac-43fd-87cd-3305edd59444"},
+  {id:"6.3",title:"Foreign Exchange",blurb:"The exchange rate sets the value of the Thai baht against other currencies. It can float (set by supply and demand) or be fixed. A weaker baht makes exports cheaper and imports dearer.",points:["Exchange rate","Floating vs fixed","Effects of changes"],yt:"https://youtu.be/wQUNYmaswPU",nb:"https://notebooklm.google.com/notebook/e8b5c44d-522e-4fc4-b673-e7c42d4ea0f1"},
+  {id:"6.4",title:"Current Account / Balance of Payments",blurb:"A record of a country's transactions with the rest of the world. The current account tracks exports and imports of goods and services; a deficit means imports exceed exports.",points:["Current account","Deficit vs surplus","Components"],yt:"https://youtu.be/oRV_eQePB4g",nb:"https://notebooklm.google.com/notebook/4948dae8-adfb-41b1-8756-5f86b359aefa"}
+ ],
+ terms:[
+  {t:"Absolute advantage",d:"When a country can produce more of a good than another using the same resources.",e:"The 'super-producer' that makes the most with the same effort."},
+  {t:"Comparative advantage",d:"When a country can produce a good at a lower opportunity cost than another.",e:"Better at making one thing because it sacrifices less to do it."},
+  {t:"Free trade",d:"Trade between countries without restrictions such as tariffs or quotas.",e:"No rules, no barriers — goods flow freely across borders."},
+  {t:"Protectionism",d:"Policies that restrict imports to protect domestic industries from foreign competition.",e:"Making it harder for foreign goods to get in."},
+  {t:"Tariffs",d:"Taxes placed on imported goods, making them more expensive.",e:"An extra charge on imports so people may buy local instead."},
+  {t:"Quotas",d:"Limits on the quantity of a good that can be imported.",e:"A cap — only so many allowed in."},
+  {t:"Subsidies",d:"Government financial help to domestic producers to make them more competitive.",e:"A money boost so local firms can compete."},
+  {t:"Embargo",d:"A complete ban on importing certain products from a country.",e:"A total 'no entry' — usually for political reasons."},
+  {t:"Exchange rate",d:"The rate at which one currency can be exchanged for another.",e:"How much your money is worth swapped for someone else's."},
+  {t:"Fixed exchange rate",d:"When a currency's value is pegged to another major currency.",e:"Locked to another country's money."},
+  {t:"Floating exchange rate",d:"When a currency's value is set by demand and supply in the market.",e:"Bounces up and down like a stock price."},
+  {t:"Exports",d:"Goods and services sold to other countries in exchange for money.",e:"Stuff a country sells abroad to earn cash."},
+  {t:"Imports",d:"Goods and services bought from other countries.",e:"The cool things you buy from abroad."},
+  {t:"Balance of payments",d:"A record of a country's trade and financial transactions with the rest of the world.",e:"A country's financial report card with the world."},
+  {t:"Current account",d:"The part of the balance of payments tracking exports and imports of goods and services.",e:"The country's trade diary."}
+ ],
+ match:[
+  {t:"Tariff",d:"A tax on imported goods."},
+  {t:"Quota",d:"A limit on the quantity of imports."},
+  {t:"Free trade",d:"Trade without restrictions between countries."},
+  {t:"Exchange rate",d:"The rate at which one currency swaps for another."},
+  {t:"Exports",d:"Goods and services sold to other countries."},
+  {t:"Comparative advantage",d:"Producing a good at a lower opportunity cost than others."}
+ ],
+ dd:{title:"Name that trade barrier",intro:"Drag each example into the method of protection it describes: <b>tariff</b>, <b>quota</b>, <b>subsidy</b> or <b>embargo</b>.",
+  bins:[{key:"Tariff",sub:"Tax on imports"},{key:"Quota",sub:"Limit on quantity"},{key:"Subsidy",sub:"Help for local firms"},{key:"Embargo",sub:"Total ban"}],
+  items:[{label:"A 20% tax on imported cars",bin:"Tariff"},{label:"An extra charge added to foreign steel",bin:"Tariff"},{label:"A limit of 10,000 tonnes of imported sugar",bin:"Quota"},{label:"Allowing only 500 foreign cars per year",bin:"Quota"},{label:"Government cash to help local rice farmers",bin:"Subsidy"},{label:"A payment to domestic producers to cut costs",bin:"Subsidy"},{label:"A total ban on imports from one country",bin:"Embargo"},{label:"Refusing to trade a product for political reasons",bin:"Embargo"}]},
+ mcq:[
+  {q:"A tariff is…",o:["a limit on imports","a tax on imports","a ban on imports","a subsidy to exporters"],a:1,fb:"A tariff is a tax on imports; a quota is a quantity limit; an embargo is a ban."},
+  {q:"Comparative advantage means a country can produce a good at a lower…",o:["price","opportunity cost","quantity","tax"],a:1,fb:"Comparative advantage is about lower opportunity cost, not just producing more."},
+  {q:"If the baht appreciates (rises in value), Thai exports become…",o:["cheaper abroad","more expensive abroad","banned","tax-free"],a:1,fb:"A stronger baht makes Thai goods dearer for foreign buyers, tending to reduce exports."},
+  {q:"A quota is…",o:["a tax on imports","a limit on the quantity of imports","a government subsidy","a fixed exchange rate"],a:1,fb:"A quota caps how much of a good can be imported."},
+  {q:"The current account mainly records…",o:["a country's exports and imports","government borrowing","interest rates","the money supply"],a:0,fb:"The current account tracks trade in goods and services, plus income and transfers."},
+  {q:"Governments may protect 'infant industries' in order to…",o:["raise tariffs forever","let new industries grow before full competition","ban all imports","fix the exchange rate"],a:1,fb:"Infant-industry protection gives new industries time to become competitive."},
+  {q:"Under a floating exchange rate, a currency's value is set by…",o:["the government","demand and supply in the currency market","a fixed peg","the rate of inflation only"],a:1,fb:"Floating rates are determined by market forces of demand and supply."},
+  {q:"A current account deficit means roughly that…",o:["exports exceed imports","imports exceed exports","the budget is balanced","the currency is fixed"],a:1,fb:"More spent on imports than earned from exports gives a current account deficit."}
+ ],
+ exam:[
+  {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'tariff'.",recipe:"2 marks → Term → Definition.",
+   model:`<span class="ss s-define" data-step="Define">A tariff means</span> a tax placed on imported goods, which raises their price.`,
+   note:"Two marks: one for 'tax', one for linking it to imports. Don't confuse it with a quota (a quantity limit)."},
+  {marks:4,cls:"mk4",cmd:"Explain with an example",q:"Explain, using an example, one method a government can use to protect domestic industries.",recipe:"4 marks → Define → Example → Explain → Develop.",
+   model:`<span class="ss s-define" data-step="Define">Protection means</span> restricting imports to shield domestic industries. <span class="ss s-example" data-step="Example">For example,</span> a government could place a tariff on imported cars. <span class="ss s-explain" data-step="Explain">This happens because</span> the tax raises the price of foreign cars. <span class="ss s-explain" data-step="Develop">Therefore,</span> consumers are more likely to buy domestically produced cars instead, protecting local jobs.`,
+   note:"Carry the example through to the effect on consumers and local producers — that final link earns the development mark."},
+  {marks:6,cls:"mk6",cmd:"Analyse",q:"Analyse how a fall in the value of the baht might affect Thailand's economy.",recipe:"6 marks → Define → Context → Chain ×2 → Overall.",
+   model:`A fall in the value of the baht is a depreciation. <span class="ss s-chain" data-step="Context">In Thailand,</span> this makes the baht cheaper against other currencies. <span class="ss s-chain" data-step="Effect 1">One effect is</span> that exports become cheaper for foreign buyers. <span class="ss s-chain" data-step="Chain">This leads to</span> a rise in demand for Thai exports such as rice and tourism, because they are now better value. <span class="ss s-chain" data-step="Effect 2">Another effect is</span> that imports become more expensive. <span class="ss s-chain" data-step="Chain">This increases</span> the cost of imported goods and raw materials, which can push up inflation. <span class="ss s-chain" data-step="Overall">Overall,</span> a weaker baht tends to boost exports and the current account, but raises import prices and inflation.`,
+   note:"Two opposing chains — exports cheaper (good for trade) and imports dearer (inflation risk). The memory hook 'WIDEC': Weak currency = Imports Dear, Exports Cheap."},
+  {marks:8,cls:"mk8",cmd:"Discuss",q:"Discuss whether free trade always benefits a country.",recipe:"8 marks → FOR → AGAINST → JUDGMENT.",
+   model:`<span class="ss s-for" data-step="For">One advantage of</span> free trade is that it lets countries specialise in what they produce best. <span class="ss s-for" data-step="For">This means that</span> goods can be produced more cheaply. <span class="ss s-for" data-step="For">For example,</span> Thailand can export rice and import goods it makes less efficiently. <span class="ss s-for" data-step="For">This can lead to</span> lower prices and more choice for consumers. <span class="ss s-for" data-step="For">Therefore,</span> living standards may rise.<br><br><span class="ss s-against" data-step="Against">However,</span> free trade does not always benefit a country, because some industries cannot compete. <span class="ss s-against" data-step="Against">One problem is</span> that domestic firms may close. <span class="ss s-against" data-step="Against">This can cause</span> unemployment in those industries. <span class="ss s-against" data-step="Against">Another disadvantage is</span> that new 'infant' industries may never grow if exposed to competition too soon. <span class="ss s-against" data-step="Against">As a result,</span> the economy may become over-dependent on imports.<br><br><span class="ss s-judge" data-step="Judgment">Overall,</span> free trade tends to benefit a country when its industries are competitive and able to adjust. <span class="ss s-judge" data-step="Judgment">This depends on</span> the stage of development and which industries are involved. <span class="ss s-judge" data-step="Judgment">If</span> a country has strong, mature industries, then free trade is likely to help. <span class="ss s-judge" data-step="Judgment">However, if</span> it has fragile infant industries, then some protection may be wise first. <span class="ss s-judge" data-step="Judgment">Therefore, I conclude that</span> free trade does not always benefit a country — it depends on how competitive its industries are.`,
+   note:"The judgment turns on industrial maturity: free trade rewards competitive economies but can expose fragile infant industries. That conditional is the route to top marks."}
+ ]
+}
+};
+
+/* ===================== PROGRESS STORAGE ===================== */
+const STORE_KEY='sisb-econ-progress';
+function loadProgress(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||{};}catch(e){return {};}}
+function saveProgress(p){try{localStorage.setItem(STORE_KEY,JSON.stringify(p));}catch(e){}}
+
+/* ===================== HOME ===================== */
+function buildHome(){
+  const g=document.getElementById('tilegrid'); g.innerHTML='';
+  Object.values(UNITS).forEach((u,i)=>{
+    const el=document.createElement('div');
+    el.className='tile '+(u.live?'live':'soon');
+    el.innerHTML=`<div class="strip"></div><span class="${u.live?'badge-live':'badge-soon'}">${u.live?'Ready':'Coming soon'}</span>
+      <div class="uno">UNIT ${u.n}</div><h3>${u.title}</h3><div class="meta">${u.topics}</div>
+      ${u.live?`<span class="go">Start revising →</span>`:''}`;
+    if(u.live) el.onclick=()=>showUnit(u.n);
+    g.appendChild(el);
+    setTimeout(()=>el.classList.add('in'),70*i);
+  });
+}
+
+/* ===================== NAV ===================== */
+function showHome(){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('home').classList.add('active');document.getElementById('crumbs').textContent='Revision Hub';window.scrollTo(0,0);}
+function showUnit(n){renderUnit(UNITS[n]);document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('unitView').classList.add('active');document.getElementById('crumbs').innerHTML='Revision Hub · <b>Unit '+n+'</b>';window.scrollTo(0,0);}
+
+/* ===================== RENDER A UNIT ===================== */
+let M={}; // matching state
+function renderUnit(U){
+  const V=document.getElementById('unitView');
+  V.innerHTML=`
+    <div class="unit-head"><div class="wrap">
+      <button class="back" onclick="showHome()">← All units</button>
+      <h2>Unit ${U.n} · ${U.title}</h2><p class="tag">${U.tag}</p>
+    </div></div>
+    <div class="secnav"><div class="wrap" id="secnav">
+      <button class="on" data-t="s-chap">Chapters</button>
+      <button data-t="s-flash">Flashcards</button>
+      <button data-t="s-match">Match-up</button>
+      <button data-t="s-dd">Sorter</button>
+      <button data-t="s-mcq">Quick-fire MCQ</button>
+      <button data-t="s-exam">Exam practice</button>
+      <button data-t="s-check">Checklist</button>
+    </div></div>
+    <div class="wrap">
+      <div class="block" id="s-chap"><h3 class="t"><span class="dot"></span>Chapters</h3>
+        <p class="intro">Work through each topic, then watch the video and quiz yourself with NotebookLM. Click a chapter to expand it.</p>
+        <div id="chaplist"></div></div>
+      <div class="block" id="s-flash"><h3 class="t"><span class="dot"></span>Key-term flashcards</h3>
+        <p class="intro">Tap a card to flip it. Front = the term you must define precisely for a 2-mark question. Back = the classroom definition plus the "in English" version.</p>
+        <div class="fc-grid" id="fcgrid"></div></div>
+      <div class="block" id="s-match"><h3 class="t"><span class="dot"></span>Match the term to its definition</h3>
+        <p class="intro">Click a term on the left, then click its matching definition on the right. Correct pairs lock in green.</p>
+        <div class="match"><div class="mcol"><h4>Terms</h4><div id="matchTerms"></div></div><div class="mcol"><h4>Definitions</h4><div id="matchDefs"></div></div></div>
+        <div class="toolbar"><span class="score" id="matchScore"></span><button class="btn ghost" onclick="buildMatch()">↺ Reset</button></div></div>
+      <div class="block" id="s-dd"><h3 class="t"><span class="dot"></span>${U.dd.title}</h3>
+        <p class="intro">${U.dd.intro}</p>
+        <div class="dd-pool" id="ddPool"></div><div class="bins" id="ddBins"></div>
+        <div class="toolbar"><button class="btn primary" onclick="checkDD()">Check answers</button><button class="btn ghost" onclick="buildDD()">↺ Reset</button><span class="score" id="ddScore"></span></div></div>
+      <div class="block" id="s-mcq"><h3 class="t"><span class="dot"></span>Quick-fire MCQ</h3>
+        <p class="intro">A quick-fire round drawn fresh from the unit's question bank — pick an answer for instant feedback and the reasoning. Hit Reset for a new set.</p>
+        <div id="mcqlist"></div><div class="toolbar"><span class="score" id="mcqScore"></span><button class="btn ghost" onclick="buildMCQ()">↺ Reset</button></div></div>
+      <div class="block" id="s-exam" style="border-bottom:none"><h3 class="t"><span class="dot"></span>Exam practice &amp; model answers</h3>
+        <p class="intro">Structured questions from 2 to 8 marks. Each model answer uses your <b>sentence starters</b> — every one is highlighted and tagged with the step it does.</p>
+        <div class="exam-intro"><b>How to read the highlights:</b> coloured text = a sentence starter; the little tag tells you which job it's doing.
+          <div class="legend">
+            <span class="lg" style="background:#e3f6ec;color:var(--green)"><span class="sw" style="background:var(--green)"></span>Define</span>
+            <span class="lg" style="background:#fdf4e1;color:#a87f00"><span class="sw" style="background:#d9a300"></span>Example / Explain</span>
+            <span class="lg" style="background:#ffeede;color:#c46a00"><span class="sw" style="background:var(--orange)"></span>Chain of reasoning</span>
+            <span class="lg" style="background:#e3f6ec;color:var(--green)"><span class="sw" style="background:var(--green)"></span>For</span>
+            <span class="lg" style="background:#fdeeee;color:var(--red)"><span class="sw" style="background:var(--red)"></span>Against</span>
+            <span class="lg" style="background:#e6effb;color:var(--navy)"><span class="sw" style="background:var(--navy)"></span>Judgment</span>
+          </div></div>
+        <div id="examlist"></div></div>
+      <div class="block" id="s-check" style="border-bottom:none"><h3 class="t"><span class="dot"></span>Revision checklist</h3>
+        <p class="intro">Rate yourself honestly against each syllabus objective. <b>Revise</b> = need to go back, <b>Nearly</b> = almost there, <b>Got it</b> = confident. Your progress bar tracks the objectives you've marked "Got it".</p>
+        <div class="progwrap"><div class="ptop"><b>Confidence</b><span class="pct" id="clPct">0 of 0 objectives confident</span></div><div class="pbar"><i id="clBar"></i></div>
+          <div style="margin-top:12px"><button class="btn ghost" style="font-size:12px;padding:7px 14px" onclick="resetUnitProgress()">↺ Reset this unit's checklist</button></div></div>
+        <div id="checklist"></div></div>
+    </div>`;
+  CUR=U;
+  buildChapters(); buildFlash(); buildMatch(); buildDD(); buildMCQ(); buildExam(); buildChecklist();
+  document.getElementById('secnav').addEventListener('click',e=>{
+    if(e.target.tagName!=='BUTTON')return;
+    document.querySelectorAll('#secnav button').forEach(b=>b.classList.remove('on'));
+    e.target.classList.add('on');
+    const t=document.getElementById(e.target.dataset.t);
+    window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-118,behavior:'smooth'});
+  });
+}
+let CUR=null;
+
+/* ---------- chapters ---------- */
+function buildChapters(){
+  const c=document.getElementById('chaplist'); c.innerHTML='';
+  CUR.chapters.forEach(ch=>{
+    const d=document.createElement('details'); d.className='chap';
+    d.innerHTML=`<summary><span class="num">${ch.id}</span>${ch.title}<span class="chev">▾</span></summary>
+      <div class="body"><p>${ch.blurb}</p>
+      <div class="keypoints">${ch.points.map(p=>`<span>${p}</span>`).join('')}</div>
+      <div class="reslinks">
+        <a class="reslink yt" href="${ch.yt}" target="_blank" rel="noopener"><span class="ic">▶</span> Watch the video</a>
+        <a class="reslink nb" href="${ch.nb}" target="_blank" rel="noopener"><span class="ic">✦</span> Revise with NotebookLM</a>
+      </div></div>`;
+    c.appendChild(d);
+  });
+}
+
+/* ---------- flashcards ---------- */
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]);}
+function buildFlash(){
+  const g=document.getElementById('fcgrid'); g.innerHTML='';
+  shuffle(CUR.terms).forEach(t=>{
+    const card=document.createElement('div'); card.className='fc';
+    card.innerHTML=`<div class="fc-inner">
+      <div class="fc-face fc-front"><div class="term">${t.t}</div><div class="hint">Tap to flip ⟳</div></div>
+      <div class="fc-face fc-back"><div class="def">${t.d}</div><div class="eng"><b>In English:</b> ${t.e}</div></div></div>`;
+    card.onclick=()=>card.classList.toggle('flip');
+    g.appendChild(card);
+  });
+}
+
+/* ---------- matching ---------- */
+function buildMatch(){
+  M={sel:null,done:0,total:CUR.match.length};
+  const T=document.getElementById('matchTerms'),D=document.getElementById('matchDefs');
+  T.innerHTML='';D.innerHTML='';
+  const defs=[...CUR.match].sort(()=>Math.random()-.5);
+  CUR.match.forEach(m=>{const t=document.createElement('div');t.className='mitem term';t.textContent=m.t;t.dataset.key=m.t;t.onclick=()=>selTerm(t);T.appendChild(t);});
+  defs.forEach(m=>{const d=document.createElement('div');d.className='mitem def';d.textContent=m.d;d.dataset.key=m.t;d.onclick=()=>selDef(d);D.appendChild(d);});
+  updMatch();
+}
+function selTerm(el){if(el.classList.contains('done'))return;document.querySelectorAll('#matchTerms .mitem').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');M.sel=el;}
+function selDef(el){
+  if(!M.sel||el.classList.contains('done'))return;
+  if(el.dataset.key===M.sel.dataset.key){el.classList.add('done');M.sel.classList.add('done');M.sel.classList.remove('sel');M.sel=null;M.done++;updMatch();}
+  else{el.classList.add('wrong');setTimeout(()=>el.classList.remove('wrong'),350);}
+}
+function updMatch(){document.getElementById('matchScore').textContent=`${M.done} / ${M.total} matched`+(M.done===M.total?' ✓ all correct!':'');}
+
+/* ---------- drag & drop ---------- */
+let dragEl=null;
+function buildDD(){
+  const pool=document.getElementById('ddPool'),bins=document.getElementById('ddBins');
+  pool.innerHTML='';bins.innerHTML='';document.getElementById('ddScore').textContent='';
+  bins.className='bins b'+CUR.dd.bins.length;
+  [...CUR.dd.items].sort(()=>Math.random()-.5).forEach(it=>{
+    const c=document.createElement('div');c.className='chip';c.draggable=true;c.textContent=it.label;c.dataset.bin=it.bin;addDrag(c);pool.appendChild(c);
+  });
+  CUR.dd.bins.forEach(b=>{
+    const bin=document.createElement('div');bin.className='bin';bin.dataset.key=b.key;
+    bin.innerHTML=`<h5>${b.key}</h5><div class="sub">${b.sub}</div>`;
+    bin.addEventListener('dragover',e=>{e.preventDefault();bin.classList.add('over')});
+    bin.addEventListener('dragleave',()=>bin.classList.remove('over'));
+    bin.addEventListener('drop',e=>{e.preventDefault();bin.classList.remove('over');if(dragEl)bin.appendChild(dragEl);});
+    bins.appendChild(bin);
+  });
+  pool.addEventListener('dragover',e=>e.preventDefault());
+  pool.addEventListener('drop',e=>{e.preventDefault();if(dragEl)pool.appendChild(dragEl);});
+}
+function addDrag(c){c.addEventListener('dragstart',()=>{dragEl=c;c.classList.add('dragging')});c.addEventListener('dragend',()=>{c.classList.remove('dragging');dragEl=null});}
+function checkDD(){
+  let right=0,total=CUR.dd.items.length;
+  document.querySelectorAll('#ddBins .bin').forEach(bin=>{
+    bin.querySelectorAll('.chip').forEach(ch=>{ch.classList.remove('ok','no');if(ch.dataset.bin===bin.dataset.key){ch.classList.add('ok');right++;}else ch.classList.add('no');});
+  });
+  const inPool=document.querySelectorAll('#ddPool .chip').length;
+  document.getElementById('ddScore').textContent=`${right} / ${total} correct`+(right===total?' ✓ perfect!':(inPool?` (${inPool} still unsorted)`:''));
+}
+
+/* ---------- mcq ---------- */
+let mcqScore=0,mcqDone=0,mcqTotal=0;
+const MCQ_DRAW=10; // questions drawn per round
+function buildMCQ(){
+  mcqScore=0;mcqDone=0;
+  const pool=shuffle(CUR.mcq).slice(0, Math.min(MCQ_DRAW, CUR.mcq.length));
+  mcqTotal=pool.length;
+  const L=document.getElementById('mcqlist');L.innerHTML='';
+  pool.forEach((m,i)=>{
+    const correctText=m.o[m.a];
+    const opts=shuffle([...m.o]);
+    const aIdx=opts.indexOf(correctText);
+    const q=document.createElement('div');q.className='q';
+    const meta=m.code?`<span class="qmeta">${m.code} · Tier ${m.tier}</span>`:'';
+    const fig=m.svg?`<div class="mcq-svg">${m.svg}</div>`:'';
+    q.innerHTML=`<div class="stem"><span class="qn">Q${i+1}.</span>${meta}${m.q}</div>${fig}`;
+    opts.forEach((opt,j)=>{const o=document.createElement('div');o.className='opt';o.textContent=opt;o.onclick=()=>answerMCQ(q,o,aIdx,j);q.appendChild(o);});
+    const fb=document.createElement('div');fb.className='fb';fb.textContent=m.fb;q.appendChild(fb);
+    L.appendChild(q);
+  });
+  updMCQ();
+}
+function answerMCQ(q,o,aIdx,j){
+  if(q.dataset.done)return;q.dataset.done='1';mcqDone++;
+  q.querySelectorAll('.opt').forEach((el,k)=>{el.classList.add('locked');if(k===aIdx)el.classList.add('correct');});
+  if(j===aIdx)mcqScore++;else o.classList.add('incorrect');
+  q.querySelector('.fb').classList.add('show');updMCQ();
+}
+function updMCQ(){document.getElementById('mcqScore').textContent=`${mcqScore} / ${mcqTotal} correct`+(mcqDone===mcqTotal?' · finished! Hit Reset for a new set.':'');}
+
+/* ---------- exam ---------- */
+function buildExam(){
+  const L=document.getElementById('examlist');L.innerHTML='';
+  CUR.exam.forEach(q=>{
+    const el=document.createElement('div');el.className='examq';
+    el.innerHTML=`<div class="qhead">
+        <span class="mk ${q.cls}">${q.marks} mark${q.marks>1?'s':''}</span>
+        <div><div class="cmd">${q.cmd}</div><div class="qtext">${q.q}</div></div>
+        <span class="toggle">Show model ▾</span></div>
+      <div class="answer"><div class="recipe">📐 ${q.recipe}</div><div class="model">${q.model}</div>
+        <div class="examiner"><b>Examiner's note:</b> ${q.note}</div></div>`;
+    el.querySelector('.qhead').onclick=function(){
+      const a=this.nextElementSibling;a.classList.toggle('show');
+      this.querySelector('.toggle').textContent=a.classList.contains('show')?'Hide answer ▴':'Show model ▾';
+    };
+    L.appendChild(el);
+  });
+}
+
+/* ---------- checklist (RAG tracker) ---------- */
+function buildChecklist(){
+  const wrap=document.getElementById('checklist'); wrap.innerHTML='';
+  const ukey='u'+CUR.n;
+  const saved=loadProgress()[ukey]||{};
+  let total=0, oi=0;
+  CUR.los.forEach(g=>{
+    const num=g.c.split(' ')[0];
+    const title=g.c.slice(num.length+1);
+    const grp=document.createElement('div'); grp.className='clgroup';
+    grp.innerHTML=`<div class="gh"><span class="num">${num}</span>${title}</div>`;
+    g.o.forEach(text=>{
+      const idx=oi++; total++;
+      const lo=document.createElement('div'); lo.className='lo';
+      lo.innerHTML=`<div class="txt">I can ${text}.</div>
+        <div class="rag">
+          <button data-r="r">Revise</button>
+          <button data-r="a">Nearly</button>
+          <button data-r="g">Got it</button>
+        </div>`;
+      const cur=saved[idx];
+      if(cur){const b=lo.querySelector('.rag button[data-r="'+cur+'"]');if(b){b.classList.add('on-'+cur);if(cur==='g')lo.classList.add('is-g');}}
+      lo.querySelectorAll('.rag button').forEach(btn=>{
+        btn.onclick=()=>{
+          lo.querySelectorAll('.rag button').forEach(b=>b.classList.remove('on-r','on-a','on-g'));
+          btn.classList.add('on-'+btn.dataset.r);
+          lo.classList.toggle('is-g', btn.dataset.r==='g');
+          const p=loadProgress(); p[ukey]=p[ukey]||{}; p[ukey][idx]=btn.dataset.r; saveProgress(p);
+          updChecklist();
+        };
+      });
+      grp.appendChild(lo);
+    });
+    wrap.appendChild(grp);
+  });
+  wrap.dataset.total=total;
+  updChecklist();
+}
+function updChecklist(){
+  const wrap=document.getElementById('checklist');
+  const total=parseInt(wrap.dataset.total||'0',10);
+  const got=wrap.querySelectorAll('.rag button.on-g').length;
+  const pct=total? Math.round(got/total*100):0;
+  document.getElementById('clBar').style.width=pct+'%';
+  document.getElementById('clPct').textContent=`${got} of ${total} objectives confident · ${pct}%`;
+}
+function resetUnitProgress(){
+  const p=loadProgress(); delete p['u'+CUR.n]; saveProgress(p); buildChecklist();
+}
+
+/* ===================== INIT ===================== */
+buildHome();</script>
+</body>
+</html>
