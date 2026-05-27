@@ -207,8 +207,9 @@
   .clgroup{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;box-shadow:var(--shadow)}
   .clgroup .gh{padding:13px 18px;font-weight:900;font-size:15px;color:var(--navy);background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
   .clgroup .gh .num{background:#fff;color:var(--blue);font-size:12.5px;font-weight:900;border-radius:8px;padding:4px 9px;border:1px solid var(--line)}
-  .lo{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .lo{padding:12px 18px;border-bottom:1px solid var(--line)}
   .lo:last-child{border-bottom:none}
+  .lo-row{display:flex;align-items:center;gap:12px}
   .lo .txt{flex:1;font-size:14.5px;color:#2b3c54}
   .lo.is-g .txt{color:var(--slate)}
   .rag{display:flex;gap:5px;flex-shrink:0}
@@ -217,6 +218,16 @@
   .rag button.on-r{background:#fdeeee;border-color:var(--red);color:var(--red)}
   .rag button.on-a{background:#fdf4e1;border-color:#d9a300;color:#a87f00}
   .rag button.on-g{background:#eefaf1;border-color:var(--green);color:var(--green)}
+  .revise-panel{display:none;margin-top:11px;padding:12px 14px;background:#fff7ee;border:1px solid #ffe2c2;border-radius:11px}
+  .revise-panel.show{display:block}
+  .btn-nb{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:800;font-size:13px;color:#fff;background:var(--orange);padding:8px 14px;border-radius:9px}
+  .btn-nb:hover{background:#e57e0c}
+  .revise-panel .ask{margin-top:10px;font-size:13px;color:#5a4a32;line-height:1.55}
+  .revise-panel .ask-lbl{font-weight:900;color:#a8631a;text-transform:uppercase;letter-spacing:.5px;font-size:11px;margin-right:4px}
+  .revise-panel .ask-q{font-style:italic}
+  .copyq{margin-left:8px;font-family:inherit;font-size:11px;font-weight:800;border:1px solid #e6b98a;background:#fff;color:#a8631a;border-radius:7px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+  .copyq:hover{background:#ffe9d2}
+  .clnote{margin-top:11px;font-size:11.5px;color:var(--slate);font-style:italic}
 </style>
 </head>
 <body>
@@ -235,7 +246,7 @@
   <div class="hero">
     <div class="wrap">
       <span class="pill">★ Cambridge IGCSE 0455 · Spirit of Excellence</span>
-      <h1>Economics Revision Hub<br><span class="em">from Bangkok to the world.</span></h1>
+      <h1>IGCSE Economics Revision<br><span class="em">from SISB to the world.</span></h1>
       <p class="lede">Six units. Thirty-five topics. Every idea grounded in a real Thai example, then connected to the global economy you'll be examined on.</p>
       <div class="globe-row">
         <span>🇹🇭 Local case studies</span><span>🌏 ASEAN &amp; the world</span><span>📈 Exam technique built in</span>
@@ -300,14 +311,26 @@ const UNITS = {
   bins:[{key:"Capital",sub:"Man-made aids"},{key:"Enterprise",sub:"Risk & organising"},{key:"Land",sub:"Natural resources"},{key:"Labour",sub:"Human effort"}],
   items:[{label:"Robotic arms in a Rayong car factory",bin:"Capital"},{label:"Founder of a Bangkok food-delivery startup",bin:"Enterprise"},{label:"Rice paddies in the Central Plains",bin:"Land"},{label:"A teacher at SISB",bin:"Labour"},{label:"A delivery truck",bin:"Capital"},{label:"Mineral deposits and forests",bin:"Land"},{label:"A vendor risking savings on a new cart",bin:"Enterprise"},{label:"Hotel staff in Phuket",bin:"Labour"}]},
  mcq:[
-  {q:"The basic economic problem exists because…",o:["money is limited","resources are scarce but wants are unlimited","governments tax people","prices keep rising"],a:1,fb:"Scarcity of resources against unlimited wants is the root of the economic problem."},
-  {q:"Which is the best example of 'land' as a factor of production?",o:["A factory robot","A coral reef and fishing waters off Phuket","A bank loan","A shop manager"],a:1,fb:"Land = all natural resources, including the sea. A robot is capital; a manager is labour."},
-  {q:"A student revises instead of going to the night market. The opportunity cost is…",o:["the cost of the bus","the Economics grade","the night market trip given up","nothing"],a:2,fb:"Opportunity cost is the next best alternative forgone — here, the night market."},
-  {q:"On a PPC, a point inside the curve shows that resources are…",o:["fully and efficiently used","not used efficiently","used only for capital goods","growing"],a:1,fb:"Inside the curve = idle resources, so production is inefficient."},
-  {q:"Which factor of production earns 'profit' as its reward?",o:["Land","Labour","Capital","Enterprise"],a:3,fb:"Enterprise earns profit; land earns rent, labour earns wages, capital earns interest."},
-  {q:"An outward shift of the whole PPC represents…",o:["a movement along the curve","economic growth","rising opportunity cost","unemployment"],a:1,fb:"More/better resources push the whole curve outward — that is economic growth."},
-  {q:"Clean air in a remote area is best described as a…",o:["merit good","free good","capital good","demerit good"],a:1,fb:"It is abundant with no opportunity cost, so it is a free good."},
-  {q:"Producing more capital goods today rather than consumer goods is most likely to…",o:["reduce future growth","raise living standards now","increase future productive capacity","have no effect"],a:2,fb:"Capital goods build future capacity, shifting the PPC out later."}
+    {code:"1.2",tier:2,q:"Which is an example of capital as a factor of production?",o:["A factory robot","A forest","A farmer","Money in a bank"],a:0,fb:"Capital means man-made goods used to produce other goods, like a robot. A forest is land, a farmer is labour, and bank money is finance, not a factor."},
+  {code:"1.2",tier:1,q:"What is the reward earned by the factor labour?",o:["Rent","Wages","Interest","Profit"],a:1,fb:"Labour earns wages; land earns rent, capital earns interest and enterprise earns profit."},
+  {code:"1.2",tier:2,q:"Which factor of production earns rent as its reward?",o:["Land","Labour","Capital","Enterprise"],a:0,fb:"Rent is the reward to land (natural resources)."},
+  {code:"1.2",tier:2,q:"A person who takes the risk of starting a business and organises the other factors is providing…",o:["land","labour","capital","enterprise"],a:3,fb:"Enterprise is the risk-taking factor that organises land, labour and capital."},
+  {code:"1.2",tier:2,q:"Which is an example of land as a factor of production?",o:["Fish stocks in the sea","A fishing boat","A fisherman","A delivery van"],a:0,fb:"Land means natural resources, including the sea and its fish. A boat and van are capital; a fisherman is labour."},
+  {code:"1.2",tier:2,q:"The quality of labour in an economy is most likely raised by…",o:["a higher birth rate","better education and training","more machinery","lower wages"],a:1,fb:"Education and training improve workers' skills, raising the quality of labour."},
+  {code:"1.2",tier:2,q:"Which would increase the quantity of capital in an economy?",o:["Building more machinery and factories","A higher birth rate","Discovering new oil reserves","Training workers"],a:0,fb:"Capital is man-made aids to production; building more machinery increases it. Birth rate and training affect labour; oil is land."},
+  {code:"1.2",tier:1,q:"The four factors of production are land, labour, capital and…",o:["money","enterprise","goods","profit"],a:1,fb:"The fourth factor is enterprise, the risk-taking organiser. Money is not a factor of production."},
+  {code:"1.2",tier:2,q:"Which reward is earned by the factor capital?",o:["Rent","Wages","Interest","Profit"],a:2,fb:"Capital earns interest."},
+  {code:"1.3",tier:2,q:"Opportunity cost is best defined as…",o:["the money price of a good","the next best alternative given up","the total cost of production","a tax on a good"],a:1,fb:"Opportunity cost is the next best alternative foregone when a choice is made."},
+  {code:"1.3",tier:2,q:"A government uses its budget to build a new metro line instead of a hospital. The opportunity cost is…",o:["the cost of the metro line","the hospital that was not built","the taxes collected","the workers employed"],a:1,fb:"Opportunity cost is the best alternative sacrificed, here the hospital."},
+  {code:"1.3",tier:2,q:"A student spends Saturday revising rather than working a paid shift. The opportunity cost is…",o:["the exam grade","the wage from the shift given up","the cost of travel","nothing, revision is free"],a:1,fb:"The opportunity cost is the next best alternative foregone, the wages from the shift."},
+  {code:"1.3",tier:1,q:"Opportunity cost exists because…",o:["money is limited","resources are scarce and have alternative uses","prices are rising","governments tax people"],a:1,fb:"Because scarce resources could be used in different ways, choosing one use means giving up another."},
+  {code:"1.4",tier:2,q:"On a production possibility curve, a point inside the curve shows that…",o:["resources are fully and efficiently used","resources are not fully or efficiently used","the economy is growing","output is impossible"],a:1,fb:"A point inside the PPC means some resources are unused or used inefficiently."},
+  {code:"1.4",tier:2,svg:'<svg viewBox="0 0 230 160" xmlns="http://www.w3.org/2000/svg"><line x1="34" y1="14" x2="34" y2="134" stroke="#5a6b82" stroke-width="1.5"/><line x1="34" y1="134" x2="214" y2="134" stroke="#5a6b82" stroke-width="1.5"/><text x="16" y="92" font-size="9" fill="#5a6b82" transform="rotate(-90 16 92)">Good A</text><text x="116" y="150" font-size="9" fill="#5a6b82">Good B</text><path d="M40,24 Q66,116 204,128" fill="none" stroke="#008BCC" stroke-width="2.5"/><circle cx="92" cy="112" r="4" fill="#FF8F1C"/><text x="99" y="110" font-size="11" font-weight="bold" fill="#002F6C">X</text></svg>',q:"The diagram shows a production possibility curve with point X. What does point X represent?",o:["Maximum possible output","Unused or inefficiently used resources","Economic growth","Output impossible to reach"],a:1,fb:"Point X lies inside the curve, so the economy is not using all its resources efficiently."},
+  {code:"1.4",tier:2,q:"An outward shift of the whole production possibility curve represents…",o:["a movement along the curve","economic growth","rising opportunity cost","unemployment"],a:1,fb:"More or better resources push the whole curve outward, which is economic growth."},
+  {code:"1.4",tier:2,q:"Moving from one point to another along a PPC illustrates…",o:["opportunity cost","economic growth","inefficiency","unemployment"],a:0,fb:"Producing more of one good means producing less of the other, the opportunity cost."},
+  {code:"1.1",tier:1,q:"The basic economic problem is that…",o:["money is limited","resources are scarce but wants are unlimited","prices are too high","governments overspend"],a:1,fb:"Scarce resources against unlimited wants is the root economic problem."},
+  {code:"1.1",tier:2,q:"Which is a free good?",o:["Air in an open field","Bottled water","A haircut","A smartphone"],a:0,fb:"A free good is abundant with no opportunity cost, like the air around us. The others are scarce economic goods."},
+  {code:"1.1",tier:2,q:"Because resources are scarce, every economy must…",o:["print more money","make choices about what to produce","raise taxes","ban imports"],a:1,fb:"Scarcity forces choices about how to allocate limited resources."}
  ],
  exam:[
   {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'opportunity cost'.",recipe:"2 marks → Term → Definition. Precise and accurate. No example needed.",
@@ -380,14 +403,30 @@ const UNITS = {
   bins:[{key:"Increases Demand",sub:"D shifts right"},{key:"Decreases Demand",sub:"D shifts left"},{key:"Increases Supply",sub:"S shifts right"},{key:"Decreases Supply",sub:"S shifts left"}],
   items:[{label:"A rise in incomes (a normal good)",bin:"Increases Demand"},{label:"A successful advertising campaign",bin:"Increases Demand"},{label:"The price of a substitute falls",bin:"Decreases Demand"},{label:"Tastes shift away from the product",bin:"Decreases Demand"},{label:"New, more efficient technology",bin:"Increases Supply"},{label:"A fall in raw-material costs",bin:"Increases Supply"},{label:"The 2011 floods damage factories",bin:"Decreases Supply"},{label:"A new tax on producers",bin:"Decreases Supply"}]},
  mcq:[
-  {q:"The law of demand states that, all else equal, as price rises…",o:["quantity demanded rises","quantity demanded falls","supply falls","demand shifts left"],a:1,fb:"Higher price → lower quantity demanded. This is a movement along the curve (a contraction)."},
-  {q:"A rise in quantity demanded caused only by a fall in price is called…",o:["an increase in demand","an extension in demand","a shift in demand","excess demand"],a:1,fb:"Price-only changes cause movements along the curve — an extension (down) or contraction (up)."},
-  {q:"Which would shift the supply curve of rice to the LEFT?",o:["A fall in fertiliser costs","A flood destroying the harvest","Better farming technology","A rise in the rice price"],a:1,fb:"A flood reduces supply at every price, shifting the whole curve left."},
-  {q:"At a price ABOVE equilibrium there will be…",o:["excess demand","excess supply","equilibrium","a shortage"],a:1,fb:"Too high a price → quantity supplied exceeds quantity demanded → a surplus (excess supply)."},
-  {q:"Demand for salt is price inelastic mainly because…",o:["it is expensive","it has few substitutes and is a tiny part of income","it is a luxury","it is taxed heavily"],a:1,fb:"Necessities with few substitutes that take little income tend to be inelastic."},
-  {q:"If a good has price elastic demand, a fall in price will cause total revenue to…",o:["fall","stay the same","rise","become zero"],a:2,fb:"When demand is elastic, the % rise in quantity outweighs the % fall in price, so revenue rises."},
-  {q:"Coffee and sugar are often consumed together, so they are…",o:["substitutes","complements","inferior goods","free goods"],a:1,fb:"Complements are used together; a price rise in one tends to lower demand for the other."},
-  {q:"Traffic pollution in Bangkok is an example of…",o:["a private cost","a negative externality","an external benefit","a free good"],a:1,fb:"It is a cost imposed on third parties not involved in the transaction — a negative externality."}
+    {code:"2.1",tier:1,q:"The law of demand states that, other things equal, when the price of a good rises…",o:["quantity demanded rises","quantity demanded falls","supply falls","demand increases"],a:1,fb:"Higher price leads to lower quantity demanded, a contraction along the demand curve."},
+  {code:"2.1",tier:1,q:"A fall in quantity demanded caused only by a rise in price is called…",o:["an extension in demand","a contraction in demand","an increase in demand","a fall in supply"],a:1,fb:"A price-only change is a movement along the curve, here a contraction."},
+  {code:"2.1",tier:1,q:"Which would shift the demand curve for coffee to the right?",o:["A rise in consumer incomes","A rise in the price of coffee","A fall in incomes","A fall in the price of coffee"],a:0,fb:"Higher incomes raise demand at every price for a normal good, shifting the curve right. Price changes only move along it."},
+  {code:"2.1",tier:1,q:"Goods that are typically bought and used together, like cars and petrol, are…",o:["substitutes","complements","inferior goods","free goods"],a:1,fb:"Complements are used together; a price rise in one tends to lower demand for the other."},
+  {code:"2.1",tier:1,q:"A rise in the price of beef increases the demand for chicken. Beef and chicken are…",o:["substitutes","complements","inferior goods","public goods"],a:0,fb:"Substitutes can replace each other; dearer beef pushes buyers towards chicken."},
+  {code:"2.5",tier:1,q:"Price elasticity of demand measures…",o:["how responsive quantity demanded is to a price change","the total revenue of a firm","the slope of the supply curve","the rate of inflation"],a:0,fb:"PED measures the responsiveness of quantity demanded to a change in price."},
+  {code:"2.5",tier:2,q:"The price of a good rises by 10% and quantity demanded falls by 20%. What is its price elasticity of demand (ignoring the sign)?",o:["0.5","2.0","10","200"],a:1,fb:"PED = percentage change in quantity divided by percentage change in price = 20 / 10 = 2.0 (elastic)."},
+  {code:"2.5",tier:1,q:"If the price elasticity of demand is greater than 1, demand is…",o:["price elastic","price inelastic","unit elastic","perfectly inelastic"],a:0,fb:"PED greater than 1 means quantity changes more than proportionately, so demand is elastic."},
+  {code:"2.5",tier:1,q:"A good with many close substitutes is likely to have demand that is…",o:["price elastic","price inelastic","perfectly inelastic","unrelated to price"],a:0,fb:"Many substitutes make buyers very responsive to price, so demand is elastic."},
+  {code:"2.5",tier:3,q:"If demand for a good is price inelastic, a rise in its price will cause the firm's total revenue to…",o:["fall","stay exactly the same","rise","fall to zero"],a:2,fb:"With inelastic demand, quantity falls less than price rises, so total revenue rises."},
+  {code:"2.3",tier:1,q:"The equilibrium price in a market is where…",o:["demand is highest","quantity demanded equals quantity supplied","supply is highest","price is lowest"],a:1,fb:"Equilibrium is where quantity demanded equals quantity supplied and the market clears."},
+  {code:"2.3",tier:1,q:"At a price set above the equilibrium price, there will be…",o:["excess demand (a shortage)","excess supply (a surplus)","equilibrium","higher demand"],a:1,fb:"Above equilibrium, quantity supplied exceeds quantity demanded, a surplus."},
+  {code:"2.3",tier:2,svg:'<svg viewBox="0 0 230 160" xmlns="http://www.w3.org/2000/svg"><line x1="34" y1="14" x2="34" y2="134" stroke="#5a6b82" stroke-width="1.5"/><line x1="34" y1="134" x2="214" y2="134" stroke="#5a6b82" stroke-width="1.5"/><text x="16" y="80" font-size="9" fill="#5a6b82" transform="rotate(-90 16 80)">Price</text><text x="112" y="150" font-size="9" fill="#5a6b82">Quantity</text><line x1="46" y1="124" x2="198" y2="30" stroke="#008BCC" stroke-width="2.5"/><text x="200" y="32" font-size="11" font-weight="bold" fill="#008BCC">S</text><line x1="46" y1="30" x2="198" y2="124" stroke="#cf3b3b" stroke-width="2.5"/><text x="200" y="124" font-size="11" font-weight="bold" fill="#cf3b3b">D</text></svg>',q:"The diagram shows the demand (D) and supply (S) curves for a good. What does the point where the two curves cross show?",o:["A maximum price","The equilibrium price and quantity","A surplus","A shortage"],a:1,fb:"Where demand meets supply is the equilibrium, the market-clearing price and quantity."},
+  {code:"2.3",tier:1,q:"If demand rises while supply stays the same, the equilibrium price will…",o:["fall","rise","stay the same","become zero"],a:1,fb:"Higher demand against unchanged supply bids the price up to a new, higher equilibrium."},
+  {code:"2.2",tier:1,q:"The law of supply states that, other things equal, a higher price leads to…",o:["a lower quantity supplied","a higher quantity supplied","lower demand","a shift in demand"],a:1,fb:"Producers offer more for sale as the price rises, so quantity supplied rises."},
+  {code:"2.2",tier:1,q:"Which would shift the supply curve of rice to the left?",o:["A poor harvest","A fall in costs","New technology","A rise in the rice price"],a:0,fb:"A poor harvest reduces supply at every price, shifting the curve left."},
+  {code:"2.2",tier:1,q:"A new tax placed on producers would shift the supply curve…",o:["to the right","to the left","not at all","upwards in demand"],a:1,fb:"A producer tax raises costs and reduces supply, so the curve shifts left."},
+  {code:"2.4",tier:2,q:"A maximum price set below the equilibrium price is most likely to cause…",o:["a surplus","a shortage","equilibrium","a higher price"],a:1,fb:"A price ceiling below equilibrium means quantity demanded exceeds quantity supplied, a shortage."},
+  {code:"2.4",tier:3,q:"A minimum price set above the equilibrium price is most likely to cause…",o:["a shortage","a surplus","equilibrium","lower output"],a:1,fb:"A price floor above equilibrium means quantity supplied exceeds quantity demanded, a surplus."},
+  {code:"2.8",tier:1,q:"Pollution from a factory that harms nearby residents is an example of…",o:["a private benefit","a negative externality","an external benefit","a free good"],a:1,fb:"It is a cost imposed on third parties not part of the transaction, a negative externality."},
+  {code:"2.8",tier:1,q:"Education is often under-consumed in a free market because it is a…",o:["demerit good","merit good","public good","free good"],a:1,fb:"Merit goods like education bring wider benefits and tend to be under-consumed if left to the market."},
+  {code:"2.9",tier:1,q:"In a mixed economy, resources are allocated by…",o:["the government only","the market only","both the market and the government","barter"],a:2,fb:"A mixed economy combines private markets with government intervention."},
+  {code:"2.9",tier:1,q:"Governments often provide goods such as street lighting because they are…",o:["luxury goods","public goods the market under-provides","demerit goods","imported goods"],a:1,fb:"Public goods are non-excludable and non-rival, so private firms under-provide them."},
+  {code:"2.6",tier:2,q:"The supply of a good tends to be more price inelastic when…",o:["production can be increased quickly","production takes a long time","there are many producers","stocks are large"],a:1,fb:"If output cannot be raised quickly, such as crops, supply responds little to price and is inelastic."}
  ],
  exam:[
   {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'equilibrium price'.",recipe:"2 marks → Term → Definition. Precise and accurate.",
@@ -472,9 +511,9 @@ const UNITS = {
   {code:"3.3",tier:2,q:"Which non-wage factor would most attract a worker to a job?",o:["Dangerous working conditions","Good promotion prospects","A very long daily commute","Unsocial working hours"],a:1,fb:"Good promotion prospects are a positive non-wage factor; the others are drawbacks."},
   {code:"3.3",tier:2,q:"Which type of worker is most likely to be paid more?",o:["One in a job needing long training and few qualified people","An unskilled worker","A worker in plentiful supply","A worker anyone could replace"],a:0,fb:"Jobs needing long training have a smaller supply of qualified workers, so wages tend to be higher."},
   {code:"3.3",tier:1,q:"As the wage offered for a job rises, the number of people willing to do it usually…",o:["falls","rises","stays the same","becomes zero"],a:1,fb:"A higher wage attracts more workers — the supply of labour rises."},
-  {code:"3.4",tier:1,q:"What is a trade union?",o:["A firm that controls a whole market","An organisation of workers that bargains over pay and conditions","A government tax department","A group of firms that fix prices"],a:1,fb:"A trade union represents workers and negotiates collectively for better pay and conditions."},
-  {code:"3.4",tier:2,q:"A trade union is most likely to raise its members' wages successfully when…",o:["the firm is making very low profits","the firm is very profitable and members are skilled","workers are easily replaced","unemployment is very high"],a:1,fb:"Bargaining power is strongest when the firm can afford higher pay and the workers are hard to replace."},
-  {code:"3.4",tier:3,q:"A possible disadvantage for the economy of higher union-negotiated wages is that…",o:["prices always fall","firms may employ fewer workers","profits always rise","exports automatically increase"],a:1,fb:"If wages rise above the market rate, firms may cut jobs or hire fewer workers — a possible rise in unemployment."},
+  {code:"3.6",tier:1,q:"A bubble-tea shop has fixed costs of $1200 and a variable cost of $2 per cup. What is its total cost when it makes 300 cups?",o:["$600","$1800","$1500","$1200"],a:1,fb:"Total cost = fixed costs + variable costs = 1200 + (2 × 300) = $1800."},
+  {code:"3.6",tier:1,q:"Total cost is equal to…",o:["fixed costs only","variable costs only","fixed costs plus variable costs","total revenue minus profit"],a:2,fb:"Total cost is the sum of all fixed costs and all variable costs at a given output."},
+  {code:"3.7",tier:2,q:"Compared with a monopoly, a competitive market usually offers consumers…",o:["higher prices","lower prices and more choice","less choice","no substitutes"],a:1,fb:"More sellers competing tends to push prices down and widen choice, unlike a single-firm monopoly."},
   {code:"3.7",tier:1,q:"A monopoly is a market with…",o:["many small sellers","one dominant seller","exactly two large firms","no sellers at all"],a:1,fb:"A monopoly is dominated by a single seller with high barriers to entry."},
   {code:"3.7",tier:1,q:"Compared with a competitive market, a monopoly is more likely to charge…",o:["lower prices","higher prices","no prices","exactly the same prices"],a:1,fb:"With no close competitors, a monopoly can act as a price maker and charge more."},
   {code:"3.7",tier:3,q:"Which is a possible advantage of a monopoly for consumers?",o:["It always lowers product quality","It may gain economies of scale and pass on lower costs","It offers less choice","It faces no pressure to improve"],a:1,fb:"A large monopoly can achieve economies of scale; if it passes the savings on, consumers may pay less."},
@@ -550,14 +589,30 @@ const UNITS = {
   bins:[{key:"Fiscal",sub:"Spending & tax"},{key:"Monetary",sub:"Interest & money"},{key:"Supply-side",sub:"Raise capacity"}],
   items:[{label:"Cutting income tax to boost spending",bin:"Fiscal"},{label:"Raising VAT",bin:"Fiscal"},{label:"Increasing government spending on welfare",bin:"Fiscal"},{label:"The Bank of Thailand raising interest rates",bin:"Monetary"},{label:"Lowering the base interest rate",bin:"Monetary"},{label:"Reducing the money supply",bin:"Monetary"},{label:"Investing in education and training",bin:"Supply-side"},{label:"Building new infrastructure",bin:"Supply-side"},{label:"Improving worker skills and productivity",bin:"Supply-side"}]},
  mcq:[
-  {q:"Which of these is a direct tax?",o:["VAT","Income tax","Excise duty on fuel","Import tariff"],a:1,fb:"Direct taxes are charged on income or wealth (income tax). The others are taxes on spending — indirect."},
-  {q:"To reduce inflation, a central bank would most likely…",o:["cut interest rates","raise interest rates","increase the money supply","cut income tax"],a:1,fb:"Higher interest rates reduce borrowing and spending, easing demand-pull inflation."},
-  {q:"A budget deficit occurs when…",o:["tax revenue exceeds spending","spending exceeds tax revenue","the budget is balanced","exports exceed imports"],a:1,fb:"Spending greater than revenue → a deficit, usually financed by borrowing."},
-  {q:"Real GDP differs from nominal GDP because it…",o:["includes exports","removes the effect of inflation","is measured per person","ignores services"],a:1,fb:"Real GDP is adjusted for inflation, so it shows changes in actual output."},
-  {q:"Unemployment caused by a general downturn in the economy is…",o:["frictional","seasonal","cyclical","structural"],a:2,fb:"Cyclical unemployment rises in a recession when total demand falls."},
-  {q:"Under a progressive tax, as income rises the proportion paid in tax…",o:["falls","stays the same","rises","becomes zero"],a:2,fb:"Progressive taxes take a higher percentage from higher earners."},
-  {q:"Tourism workers losing jobs in the rainy low season is an example of…",o:["structural unemployment","seasonal unemployment","cyclical unemployment","frictional unemployment"],a:1,fb:"Seasonal unemployment follows predictable yearly patterns of demand."},
-  {q:"Expansionary fiscal policy involves…",o:["higher taxes and lower spending","lower taxes and/or higher spending","raising interest rates","reducing the money supply"],a:1,fb:"To expand demand, the government cuts taxes and/or raises spending."}
+    {code:"4.8",tier:1,q:"Inflation is best defined as…",o:["a fall in the general price level","a sustained rise in the general price level","a rise in unemployment","a fall in GDP"],a:1,fb:"Inflation is a sustained rise in the average level of prices over time."},
+  {code:"4.8",tier:1,q:"In most countries, inflation is measured using the…",o:["exchange rate","Consumer Price Index (CPI)","unemployment rate","balance of payments"],a:1,fb:"The CPI tracks the price of a typical basket of goods households buy."},
+  {code:"4.8",tier:2,q:"Inflation caused by rising costs, such as higher oil prices, is called…",o:["demand-pull inflation","cost-push inflation","deflation","hyperinflation"],a:1,fb:"When higher costs push prices up it is cost-push inflation."},
+  {code:"4.8",tier:2,q:"Inflation caused by too much total demand in the economy is called…",o:["cost-push inflation","demand-pull inflation","deflation","stagflation"],a:1,fb:"Excess demand pulling prices up is demand-pull inflation."},
+  {code:"4.8",tier:2,q:'The price index for a country is shown below.<table class="qt"><tr><th>Year 1</th><td>100</td></tr><tr><th>Year 2</th><td>105</td></tr></table>What is the rate of inflation between Year 1 and Year 2?',o:["5%","105%","0.5%","95%"],a:0,fb:"Inflation = change in index divided by the original, times 100 = 5 / 100 x 100 = 5%."},
+  {code:"4.8",tier:2,q:"A likely consequence of high inflation is that…",o:["the purchasing power of money falls","savings buy more","exports always rise","unemployment falls to zero"],a:0,fb:"As prices rise, each unit of money buys less, so purchasing power falls."},
+  {code:"4.6",tier:1,q:"Economic growth is usually measured by an increase in…",o:["real GDP","the population","inflation","imports"],a:0,fb:"Growth is a rise in real GDP, the value of output adjusted for inflation."},
+  {code:"4.6",tier:2,q:"Real GDP is preferred to nominal GDP because it…",o:["includes exports","removes the effect of inflation","is measured per person","is always larger"],a:1,fb:"Real GDP strips out inflation, so it shows changes in actual output."},
+  {code:"4.6",tier:1,q:"GDP per capita is calculated by…",o:["adding exports and imports","dividing GDP by the population","multiplying GDP by inflation","subtracting tax from GDP"],a:1,fb:"Per capita means per person, so GDP is divided by the population."},
+  {code:"4.6",tier:2,q:"A possible cost of rapid economic growth is…",o:["lower prices","more pollution and environmental damage","less output","lower incomes"],a:1,fb:"Faster growth can raise pollution, congestion and resource use."},
+  {code:"4.6",tier:1,q:"On a PPC diagram, economic growth is shown by…",o:["a movement along the curve","an outward shift of the curve","a point inside the curve","an inward shift"],a:1,fb:"More productive capacity shifts the whole PPC outward."},
+  {code:"4.7",tier:1,q:"Unemployment occurs when…",o:["people choose not to work","people willing and able to work cannot find a job","firms make losses","prices fall"],a:1,fb:"The unemployed are those able and willing to work but without a job."},
+  {code:"4.7",tier:1,q:"Unemployment caused by a fall in total demand during a recession is…",o:["frictional","seasonal","cyclical","structural"],a:2,fb:"Cyclical unemployment rises when demand and output fall in a downturn."},
+  {code:"4.7",tier:2,q:"A worker who loses a factory job because their skills are no longer needed faces…",o:["seasonal unemployment","structural unemployment","cyclical unemployment","frictional unemployment"],a:1,fb:"Structural unemployment arises when an industry declines and skills no longer match jobs."},
+  {code:"4.7",tier:2,q:"Hotel staff laid off after the tourist season experience…",o:["seasonal unemployment","structural unemployment","cyclical unemployment","voluntary unemployment"],a:0,fb:"Seasonal unemployment follows predictable yearly demand patterns."},
+  {code:"4.3",tier:1,q:"Fiscal policy uses…",o:["interest rates and the money supply","government spending and taxation","exchange rates","tariffs and quotas"],a:1,fb:"Fiscal policy is the use of government spending and taxation."},
+  {code:"4.3",tier:1,q:"Which of these is a direct tax?",o:["VAT","Income tax","Excise duty on fuel","Import tariff"],a:1,fb:"Direct taxes are charged on income or wealth; the others are taxes on spending (indirect)."},
+  {code:"4.3",tier:2,q:"A budget deficit occurs when…",o:["tax revenue exceeds spending","government spending exceeds tax revenue","the budget is balanced","exports exceed imports"],a:1,fb:"Spending greater than revenue produces a deficit, usually covered by borrowing."},
+  {code:"4.4",tier:1,q:"Monetary policy is mainly carried out by…",o:["the central bank","the police","local councils","exporters"],a:0,fb:"The central bank sets interest rates and influences the money supply."},
+  {code:"4.4",tier:1,q:"To reduce inflation, a central bank would most likely…",o:["cut interest rates","raise interest rates","cut income tax","increase spending"],a:1,fb:"Higher interest rates reduce borrowing and spending, easing inflation."},
+  {code:"4.4",tier:2,q:"A cut in interest rates is most likely to…",o:["reduce borrowing","increase borrowing and spending","raise unemployment","reduce GDP"],a:1,fb:"Cheaper borrowing tends to raise consumption and investment, boosting demand."},
+  {code:"4.5",tier:1,q:"Supply-side policies aim to…",o:["increase the economy's productive capacity","raise import tariffs","cut the money supply","reduce the population"],a:0,fb:"Supply-side policies expand what the economy can produce, shifting the PPC out."},
+  {code:"4.5",tier:2,q:"Which is a supply-side policy?",o:["Investing in education and training","Raising VAT","Cutting interest rates","Increasing welfare payments"],a:0,fb:"Education and training raise productivity and capacity, a supply-side measure."},
+  {code:"4.5",tier:2,q:"Better infrastructure raises an economy's output mainly because it…",o:["raises prices","improves productivity and efficiency","increases the population","reduces exports"],a:1,fb:"Good infrastructure helps firms produce and move goods more efficiently."}
  ],
  exam:[
   {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'fiscal policy'.",recipe:"2 marks → Term → Definition.",
@@ -617,14 +672,22 @@ const UNITS = {
   bins:[{key:"More Developed (MDC)",sub:"e.g. Japan, Germany"},{key:"Less Developed (LDC)",sub:"e.g. low-income nations"}],
   items:[{label:"High GDP per capita",bin:"More Developed (MDC)"},{label:"High life expectancy",bin:"More Developed (MDC)"},{label:"Large service (tertiary) sector",bin:"More Developed (MDC)"},{label:"HDI close to 1",bin:"More Developed (MDC)"},{label:"Low income per head",bin:"Less Developed (LDC)"},{label:"Many workers in farming (primary)",bin:"Less Developed (LDC)"},{label:"Lower life expectancy",bin:"Less Developed (LDC)"},{label:"Lower HDI score",bin:"Less Developed (LDC)"}]},
  mcq:[
-  {q:"The Human Development Index combines income with…",o:["exports and imports","life expectancy and education","inflation and unemployment","tax and spending"],a:1,fb:"HDI = income + health (life expectancy) + education, giving a broader picture than GDP alone."},
-  {q:"GDP per capita is calculated by…",o:["adding exports and imports","dividing GDP by the population","multiplying GDP by inflation","dividing GDP by the workforce"],a:1,fb:"Per capita means 'per person' — GDP divided by population."},
-  {q:"A high dependency ratio means…",o:["most people are of working age","a large share of dependents relative to workers","high exports","low inflation"],a:1,fb:"More young and old dependents per worker raises the burden on the working population."},
-  {q:"Which is typical of a less developed country?",o:["A large service sector","Most workers in agriculture","Very high GDP per capita","An HDI near 1"],a:1,fb:"LDCs tend to have a large primary sector and lower income and HDI."},
-  {q:"Purchasing Power Parity is used to…",o:["measure unemployment","compare what money can buy across countries","calculate tariffs","track inflation only"],a:1,fb:"PPP adjusts for price differences so living standards can be compared fairly."},
-  {q:"An ageing population tends to…",o:["lower the dependency ratio","raise the dependency ratio","raise the birth rate","reduce life expectancy"],a:1,fb:"More elderly dependents per worker pushes the dependency ratio up — a challenge Thailand now faces."},
-  {q:"Absolute poverty refers to…",o:["being poorer than your neighbours","being unable to afford basic necessities","having below-average income","paying high taxes"],a:1,fb:"Absolute poverty = lacking the income for basic needs; relative poverty is being poor compared with others."},
-  {q:"Compared with GDP, the HDI is a better measure of development because it…",o:["is easier to calculate","includes health and education, not just income","ignores population","only counts exports"],a:1,fb:"HDI captures wellbeing more fully by adding health and education to income."}
+    {code:"5.3",tier:2,q:"The dependency ratio compares…",o:["exports to imports","dependents (young and old) to the working-age population","GDP to population","savings to income"],a:1,fb:"It measures how many non-working dependents each working-age person supports."},
+  {code:"5.3",tier:2,q:"An ageing population is most likely to…",o:["lower the dependency ratio","raise the dependency ratio","raise the birth rate","increase the workforce"],a:1,fb:"More elderly dependents per worker pushes the dependency ratio up."},
+  {code:"5.3",tier:3,q:"A rapidly growing population in a developing country is most likely to…",o:["reduce demand for schools","strain public services such as schools and hospitals","lower the birth rate","raise GDP per capita immediately"],a:1,fb:"Fast growth raises demand for services faster than they can expand, straining resources."},
+  {code:"5.3",tier:2,q:"A population pyramid shows…",o:["a country's exports","the age and sex structure of a population","the inflation rate","government spending"],a:1,fb:"It graphs the population split by age group and sex."},
+  {code:"5.3",tier:3,q:"An ageing population, like Thailand's, is likely to raise government spending on…",o:["schools and child benefits","pensions and healthcare","import tariffs","military training"],a:1,fb:"More elderly people increase the need for pensions and healthcare."},
+  {code:"5.3",tier:3,q:"The optimum population is the size at which…",o:["the birth rate is highest","output per head (living standards) is maximised","there is no unemployment","the country is largest"],a:1,fb:"Optimum population gives the best use of resources and the highest output per person."},
+  {code:"5.3",tier:3,q:"If many young workers emigrate from a country, the dependency ratio is likely to…",o:["fall","rise","stay the same","become zero"],a:1,fb:"Losing working-age people leaves relatively more dependents, raising the ratio."},
+  {code:"5.2",tier:2,q:"Absolute poverty means…",o:["being poorer than your neighbours","being unable to afford basic necessities","paying high taxes","having below-average income"],a:1,fb:"Absolute poverty is lacking the income for basic needs like food and shelter."},
+  {code:"5.2",tier:2,q:"Relative poverty means…",o:["being unable to afford food","being poor compared with others in society","living in a rural area","earning no income at all"],a:1,fb:"Relative poverty is being significantly worse off than the average in your society."},
+  {code:"5.2",tier:3,q:"Which policy is most likely to reduce poverty in the long run?",o:["Investment in education and skills","Cutting taxes on luxuries","Reducing the minimum wage","Raising import tariffs"],a:0,fb:"Education and skills raise earning power, tackling the root causes of poverty over time."},
+  {code:"5.2",tier:3,q:"A common cause of poverty in many developing countries is…",o:["high incomes","low levels of education and few skills","too much capital","an ageing population"],a:1,fb:"Limited education and skills trap people in low-paid work and poverty."},
+  {code:"5.2",tier:3,q:"A possible drawback of using cash benefits to reduce poverty is that…",o:["they raise exports","they must be funded by taxes and may reduce work incentives","they always cause inflation","they reduce the population"],a:1,fb:"Benefits cost tax revenue and, if poorly designed, can weaken the incentive to work."},
+  {code:"5.1",tier:2,q:"The Human Development Index combines income with…",o:["exports and imports","health (life expectancy) and education","inflation and unemployment","tax and spending"],a:1,fb:"HDI blends income with life expectancy and education for a fuller measure of development."},
+  {code:"5.1",tier:3,q:"The HDI is often preferred to GDP per capita because it…",o:["is easier to calculate","measures wellbeing more broadly than income alone","ignores health","only counts exports"],a:1,fb:"By adding health and education, HDI captures development beyond just average income."},
+  {code:"5.1",tier:2,q:"Purchasing Power Parity (PPP) is used to…",o:["measure unemployment","compare what incomes can actually buy across countries","set tariffs","track the money supply"],a:1,fb:"PPP adjusts for price differences so living standards can be compared fairly."},
+  {code:"5.1",tier:3,q:"A limitation of GDP per capita as a measure of living standards is that it…",o:["is always too high","ignores income distribution and unpaid work","counts only exports","cannot be calculated"],a:1,fb:"An average hides inequality and leaves out non-market activity and wellbeing."}
  ],
  exam:[
   {marks:2,cls:"mk2",cmd:"Define",q:"Define the Human Development Index (HDI).",recipe:"2 marks → Term → Definition.",
@@ -686,14 +749,26 @@ const UNITS = {
   bins:[{key:"Tariff",sub:"Tax on imports"},{key:"Quota",sub:"Limit on quantity"},{key:"Subsidy",sub:"Help for local firms"},{key:"Embargo",sub:"Total ban"}],
   items:[{label:"A 20% tax on imported cars",bin:"Tariff"},{label:"An extra charge added to foreign steel",bin:"Tariff"},{label:"A limit of 10,000 tonnes of imported sugar",bin:"Quota"},{label:"Allowing only 500 foreign cars per year",bin:"Quota"},{label:"Government cash to help local rice farmers",bin:"Subsidy"},{label:"A payment to domestic producers to cut costs",bin:"Subsidy"},{label:"A total ban on imports from one country",bin:"Embargo"},{label:"Refusing to trade a product for political reasons",bin:"Embargo"}]},
  mcq:[
-  {q:"A tariff is…",o:["a limit on imports","a tax on imports","a ban on imports","a subsidy to exporters"],a:1,fb:"A tariff is a tax on imports; a quota is a quantity limit; an embargo is a ban."},
-  {q:"Comparative advantage means a country can produce a good at a lower…",o:["price","opportunity cost","quantity","tax"],a:1,fb:"Comparative advantage is about lower opportunity cost, not just producing more."},
-  {q:"If the baht appreciates (rises in value), Thai exports become…",o:["cheaper abroad","more expensive abroad","banned","tax-free"],a:1,fb:"A stronger baht makes Thai goods dearer for foreign buyers, tending to reduce exports."},
-  {q:"A quota is…",o:["a tax on imports","a limit on the quantity of imports","a government subsidy","a fixed exchange rate"],a:1,fb:"A quota caps how much of a good can be imported."},
-  {q:"The current account mainly records…",o:["a country's exports and imports","government borrowing","interest rates","the money supply"],a:0,fb:"The current account tracks trade in goods and services, plus income and transfers."},
-  {q:"Governments may protect 'infant industries' in order to…",o:["raise tariffs forever","let new industries grow before full competition","ban all imports","fix the exchange rate"],a:1,fb:"Infant-industry protection gives new industries time to become competitive."},
-  {q:"Under a floating exchange rate, a currency's value is set by…",o:["the government","demand and supply in the currency market","a fixed peg","the rate of inflation only"],a:1,fb:"Floating rates are determined by market forces of demand and supply."},
-  {q:"A current account deficit means roughly that…",o:["exports exceed imports","imports exceed exports","the budget is balanced","the currency is fixed"],a:1,fb:"More spent on imports than earned from exports gives a current account deficit."}
+    {code:"6.2",tier:1,q:"A tariff is…",o:["a limit on imports","a tax on imports","a ban on imports","a subsidy to exporters"],a:1,fb:"A tariff is a tax on imports; a quota limits quantity and an embargo bans trade."},
+  {code:"6.2",tier:1,q:"A quota is…",o:["a tax on imports","a limit on the quantity of imports","a total ban on trade","a cash grant to producers"],a:1,fb:"A quota restricts how much of a good may be imported."},
+  {code:"6.2",tier:2,q:"Government cash given to domestic producers to help them compete is a…",o:["tariff","quota","subsidy","sales tax"],a:2,fb:"A subsidy lowers domestic producers' costs so they can compete with imports."},
+  {code:"6.2",tier:1,q:"A complete ban on trade with a particular country is an…",o:["tariff","quota","embargo","exchange rate"],a:2,fb:"An embargo is a total ban, usually for political reasons."},
+  {code:"6.2",tier:2,q:"A reason to protect an infant industry is to…",o:["raise tariffs forever","let it grow before facing full foreign competition","ban all exports","fix the exchange rate"],a:1,fb:"Temporary protection gives a young industry time to become competitive."},
+  {code:"6.2",tier:1,q:"A benefit of free trade is…",o:["higher prices","lower prices and more choice for consumers","fewer goods available","more unemployment"],a:1,fb:"Free trade and specialisation tend to lower prices and widen consumer choice."},
+  {code:"6.2",tier:2,q:"A drawback of protection such as tariffs is that…",o:["consumers pay higher prices","exports always rise","inflation always falls","choice increases"],a:0,fb:"Tariffs raise the price of imports, so consumers tend to pay more."},
+  {code:"6.4",tier:1,q:"The current account of the balance of payments mainly records…",o:["a country's exports and imports of goods and services","government borrowing","the money supply","interest rates"],a:0,fb:"The current account tracks trade in goods and services, plus income and transfers."},
+  {code:"6.4",tier:1,q:"A current account deficit means that…",o:["exports exceed imports","the value of imports exceeds the value of exports","the budget is balanced","the currency is fixed"],a:1,fb:"Spending more on imports than is earned from exports gives a current account deficit."},
+  {code:"6.4",tier:2,q:"A current account surplus means the value of exports…",o:["is less than imports","exceeds the value of imports","equals zero","equals government spending"],a:1,fb:"A surplus means export earnings are greater than import spending."},
+  {code:"6.4",tier:2,q:"Which would help reduce a current account deficit?",o:["A rise in exports","A rise in imports","A fall in exports","More spending on imports"],a:0,fb:"Selling more abroad raises export earnings, narrowing the deficit."},
+  {code:"6.1",tier:1,q:"Exports are…",o:["goods and services bought from other countries","goods and services sold to other countries","taxes on trade","limits on imports"],a:1,fb:"Exports are sold abroad and earn the country money; imports are bought in."},
+  {code:"6.1",tier:1,q:"International specialisation means countries…",o:["produce everything themselves","concentrate on producing what they are relatively best at","ban all imports","fix their exchange rates"],a:1,fb:"Countries specialise in what they produce relatively efficiently, then trade."},
+  {code:"6.1",tier:2,q:"Comparative advantage means producing a good at a lower…",o:["price","opportunity cost than other countries","quantity","tax"],a:1,fb:"Comparative advantage is about a lower opportunity cost, not simply producing more."},
+  {code:"6.1",tier:2,q:"A risk of a country specialising heavily in one product is that…",o:["it can never trade","it becomes vulnerable if demand or the price for that product falls","it has too much choice","it must raise tariffs"],a:1,fb:"Over-dependence on one product is risky if its world price or demand drops."},
+  {code:"6.1",tier:2,q:"Thailand exporting rice and importing machinery is an example of…",o:["protectionism","specialisation and trade","an embargo","a fixed exchange rate"],a:1,fb:"Each country trades what it produces well for what it does not, which is specialisation and trade."},
+  {code:"6.3",tier:1,q:"An exchange rate is…",o:["the price of one currency in terms of another","a tax on imports","the rate of inflation","the interest rate"],a:0,fb:"The exchange rate is how much of one currency is needed to buy another."},
+  {code:"6.3",tier:2,q:"If the Thai baht depreciates (falls in value), Thai exports become…",o:["more expensive abroad","cheaper for foreign buyers","banned","tax-free"],a:1,fb:"A weaker baht lowers the foreign-currency price of Thai exports, tending to boost demand for them."},
+  {code:"6.3",tier:2,q:"A depreciation of the baht makes imports…",o:["cheaper","more expensive","free","banned"],a:1,fb:"A weaker baht raises the price of foreign goods, so imports cost more."},
+  {code:"6.3",tier:2,q:"If $1 = 35 baht, how much is a product priced at $40 worth in baht?",o:["1400 baht","75 baht","875 baht","35 baht"],a:0,fb:"40 x 35 = 1400 baht."}
  ],
  exam:[
   {marks:2,cls:"mk2",cmd:"Define",q:"Define the term 'tariff'.",recipe:"2 marks → Term → Definition.",
@@ -787,6 +862,7 @@ function renderUnit(U){
       <div class="block" id="s-check" style="border-bottom:none"><h3 class="t"><span class="dot"></span>Revision checklist</h3>
         <p class="intro">Rate yourself honestly against each syllabus objective. <b>Revise</b> = need to go back, <b>Nearly</b> = almost there, <b>Got it</b> = confident. Your progress bar tracks the objectives you've marked "Got it".</p>
         <div class="progwrap"><div class="ptop"><b>Confidence</b><span class="pct" id="clPct">0 of 0 objectives confident</span></div><div class="pbar"><i id="clBar"></i></div>
+          <div class="clnote">A guide based on your own self-rating — not a predicted grade.</div>
           <div style="margin-top:12px"><button class="btn ghost" style="font-size:12px;padding:7px 14px" onclick="resetUnitProgress()">↺ Reset this unit's checklist</button></div></div>
         <div id="checklist"></div></div>
     </div>`;
@@ -938,24 +1014,34 @@ function buildChecklist(){
   CUR.los.forEach(g=>{
     const num=g.c.split(' ')[0];
     const title=g.c.slice(num.length+1);
+    const chap=CUR.chapters.find(c=>c.id===num) || {};
     const grp=document.createElement('div'); grp.className='clgroup';
     grp.innerHTML=`<div class="gh"><span class="num">${num}</span>${title}</div>`;
     g.o.forEach(text=>{
       const idx=oi++; total++;
+      const prompt=`I'm revising IGCSE Economics (${num} ${title}). Explain this with a clear example, then ask me three practice questions and check my answers: "I can ${text}."`;
       const lo=document.createElement('div'); lo.className='lo';
-      lo.innerHTML=`<div class="txt">I can ${text}.</div>
+      lo.innerHTML=`<div class="lo-row"><div class="txt">I can ${text}.</div>
         <div class="rag">
           <button data-r="r">Revise</button>
           <button data-r="a">Nearly</button>
           <button data-r="g">Got it</button>
+        </div></div>
+        <div class="revise-panel">
+          ${chap.nb?`<a class="btn-nb" href="${chap.nb}" target="_blank" rel="noopener">📒 Revise this in NotebookLM →</a>`:''}
+          <div class="ask"><span class="ask-lbl">Ask it:</span> <span class="ask-q">${prompt}</span><button class="copyq" type="button">Copy</button></div>
         </div>`;
+      const panel=lo.querySelector('.revise-panel');
+      const copyBtn=lo.querySelector('.copyq');
+      copyBtn.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(prompt);copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent='Copy',1400);};
       const cur=saved[idx];
-      if(cur){const b=lo.querySelector('.rag button[data-r="'+cur+'"]');if(b){b.classList.add('on-'+cur);if(cur==='g')lo.classList.add('is-g');}}
+      if(cur){const b=lo.querySelector('.rag button[data-r="'+cur+'"]');if(b){b.classList.add('on-'+cur);if(cur==='g')lo.classList.add('is-g');if(cur==='r')panel.classList.add('show');}}
       lo.querySelectorAll('.rag button').forEach(btn=>{
         btn.onclick=()=>{
           lo.querySelectorAll('.rag button').forEach(b=>b.classList.remove('on-r','on-a','on-g'));
           btn.classList.add('on-'+btn.dataset.r);
           lo.classList.toggle('is-g', btn.dataset.r==='g');
+          panel.classList.toggle('show', btn.dataset.r==='r');
           const p=loadProgress(); p[ukey]=p[ukey]||{}; p[ukey][idx]=btn.dataset.r; saveProgress(p);
           updChecklist();
         };
@@ -967,13 +1053,22 @@ function buildChecklist(){
   wrap.dataset.total=total;
   updChecklist();
 }
+function gradeBand(pct){
+  if(pct>=90) return 'A* confidence';
+  if(pct>=80) return 'A confidence';
+  if(pct>=70) return 'B confidence';
+  if(pct>=60) return 'C confidence';
+  if(pct>=50) return 'D confidence';
+  if(pct>=40) return 'E confidence';
+  return 'keep building';
+}
 function updChecklist(){
   const wrap=document.getElementById('checklist');
   const total=parseInt(wrap.dataset.total||'0',10);
   const got=wrap.querySelectorAll('.rag button.on-g').length;
   const pct=total? Math.round(got/total*100):0;
   document.getElementById('clBar').style.width=pct+'%';
-  document.getElementById('clPct').textContent=`${got} of ${total} objectives confident · ${pct}%`;
+  document.getElementById('clPct').textContent=`${got} of ${total} confident · ${pct}% · ${gradeBand(pct)}`;
 }
 function resetUnitProgress(){
   const p=loadProgress(); delete p['u'+CUR.n]; saveProgress(p); buildChecklist();
